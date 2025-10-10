@@ -35,16 +35,20 @@ export default function Rental() {
                 placeholder="Search by location, property, or brand"
                 className="flex-1 h-12 px-4 bg-white text-black border border-white/60 placeholder-black/60"
               />
-              <button className="h-12 px-6 bg-[#E65C00] text-white border border-[#E65C00] ">Search</button>
+              <button className="h-12 px-4 bg-black text-white border-4 border-white hover:bg-[#A97C50] transition-all duration-500 font-medium text-sm sm:text-base">
+                <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
+              </button>
             </div>
           </div>
           <h1 className="text-white text-4xl md:text-6xl max-w-xl font-semibold leading-16 mt-8">Where Happiness Finds a Home</h1>
         </div>
       </section>
       <ProductList />
-      <div className="max-w-6xl mx-auto">
-      <FeaturedProperties />
-      </div>
+      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
+        <div className="max-w-6xl mx-auto">
+          <FeaturedProperties />
+        </div>
+      </section>
       <ContactForm />
       <Footer />
     </main>

@@ -158,21 +158,6 @@ export default function Footer() {
               </p>
             </div>
 
-            {/* Contact Buttons */}
-            <div className="flex gap-12 sm:gap-24">
-              <button className="flex flex-col items-center gap-1 sm:gap-2 text-white px-3 sm:px-4 py-2 rounded-md hover:bg-neutral-600 transition-colors text-xs">
-                <Image src="/images/enquiry.svg" alt="" width={25} height={25} />
-                ENQUIRY
-              </button>
-              <button className="flex flex-col items-center gap-1 sm:gap-2 text-white px-3 sm:px-4 py-2 rounded-md hover:bg-neutral-600 transition-colors text-xs">
-                <Image src="/images/phone.svg" alt="" width={25} height={25} />
-                CALL
-              </button>
-              <button className="flex flex-col items-center gap-1 sm:gap-2 text-white px-3 sm:px-4 py-2 rounded-md hover:bg-neutral-600 transition-colors text-xs">
-                <Image src="/images/whatsapp.svg" alt="" width={25} height={25} />
-                WHATSAPP
-              </button>
-            </div>
           </div>
         </div>
       </section>

@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { rentals, RentalProperty } from '../../data/rentals'
 
 interface Product {
   id: string
@@ -23,66 +24,44 @@ interface ProductListProps {
   products?: Product[]
 }
 
-const sampleProducts: Product[] = [
-  {
-    id: '1',
-    imageSrc: '/images/carousel1.png',
-    imageAlt: 'Sobha One',
-    price: 'AED 1,895,000',
-    title: 'Sobha One',
-    location: 'Business Bay, Dubai',
-    beds: 1,
-    baths: 2,
-    area: '1,030',
-    propertyType: 'Apartment',
-    city: 'Dubai',
-    href: '#'
-  },
-  {
-    id: '2',
-    imageSrc: '/images/product-dunya-tower-dubai.png',
-    imageAlt: 'Dunya Tower',
-    price: 'AED 2,450,000',
-    title: 'Dunya Tower',
-    location: 'Downtown Dubai',
-    beds: 2,
-    baths: 3,
-    area: '1,450',
-    propertyType: 'Apartment',
-    city: 'Dubai',
-    href: '#'
-  },
-  {
-    id: '3',
-    imageSrc: '/images/product-azizi-developments-dubai.png',
-    imageAlt: 'Azizi Developments',
-    price: 'AED 5,200,000',
-    title: 'Azizi Developments',
-    location: 'Dubai Marina',
-    beds: 3,
-    baths: 4,
-    area: '2,800',
-    propertyType: 'Penthouse',
-    city: 'Dubai',
-    href: '#'
-  },
-  {
-    id: '4',
-    imageSrc: '/images/product-azizi-developments-dubai.png',
-    imageAlt: 'Palm Villa',
-    price: 'AED 8,500,000',
-    title: 'Palm Villa',
-    location: 'Jumeirah, Dubai',
-    beds: 4,
-    baths: 5,
-    area: '3,200',
-    propertyType: 'Villa',
-    city: 'Dubai',
-    href: '#'
+// Transform rental data to match Product interface
+const rentalProducts: Product[] = rentals.map((rental: RentalProperty) => {
+  // Extract beds and baths from unit string
+  const bedsMatch = rental.unit.match(/(\d+)\s*BEDROOM/i)
+  const bathsMatch = rental.unit.match(/(\d+(?:\.\d+)?)\s*BATH/i)
+  
+  const beds = bedsMatch ? parseInt(bedsMatch[1]) : 3
+  const baths = bathsMatch ? Math.ceil(parseFloat(bathsMatch[1])) : 2
+  
+  // Extract area from suite string (remove "SQ.FT" and any other text)
+  const areaMatch = rental.suite.match(/(\d+(?:\.\d+)?)/)
+  const area = areaMatch ? areaMatch[1] : '1,265'
+  
+  // Determine location based on building name
+  let location = 'Dubai'
+  if (rental.buildingName.toLowerCase().includes('canal')) {
+    location = 'Business Bay, Dubai'
+  } else if (rental.buildingName.toLowerCase().includes('dunya')) {
+    location = 'Downtown Dubai'
   }
-]
+  
+  return {
+    id: rental.id,
+    imageSrc: rental.galleryImages[0], // Use first gallery image as main image
+    imageAlt: rental.buildingName,
+    price: rental.price,
+    title: rental.buildingName,
+    location: location,
+    beds: beds,
+    baths: baths,
+    area: area,
+    propertyType: 'Apartment',
+    city: 'Dubai',
+    href: `/rental/${rental.id}`
+  }
+})
 
-export default function ProductList({ products = sampleProducts }: ProductListProps) {
+export default function ProductList({ products = rentalProducts }: ProductListProps) {
   const [filters, setFilters] = useState({
     propertyType: '',
     bedrooms: '',

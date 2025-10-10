@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback, TouchEvent } from 'react'
+import { useState, useCallback, useEffect, TouchEvent } from 'react'
 import Image from 'next/image'
 
 interface HomeCarouselProps {
@@ -18,6 +18,7 @@ export default function HomeCarousel({
   const [currentIndex, setCurrentIndex] = useState(1)
   const [touchStart, setTouchStart] = useState(0)
   const [touchEnd, setTouchEnd] = useState(0)
+  const [isAutoplayActive, setIsAutoplayActive] = useState(true)
   
 
   const nextSlide = useCallback(() => {
@@ -50,6 +51,25 @@ export default function HomeCarousel({
     
     setTouchStart(0)
     setTouchEnd(0)
+  }
+
+  // Autoplay functionality
+  useEffect(() => {
+    if (!isAutoplayActive) return
+
+    const autoplayInterval = setInterval(() => {
+      nextSlide()
+    }, 4000) // Change slide every 4 seconds
+
+    return () => clearInterval(autoplayInterval)
+  }, [isAutoplayActive, nextSlide])
+
+  // Pause autoplay on hover/touch
+  const handleMouseEnter = () => setIsAutoplayActive(false)
+  const handleMouseLeave = () => setIsAutoplayActive(true)
+  const handleTouchStartWithPause = (e: TouchEvent) => {
+    setIsAutoplayActive(false)
+    handleTouchStart(e)
   }
 
  
@@ -88,9 +108,11 @@ export default function HomeCarousel({
     >
       <div 
         className="relative h-48 sm:h-56 md:h-72 lg:h-96 overflow-visible touch-pan-y"
-        onTouchStart={handleTouchStart}
+        onTouchStart={handleTouchStartWithPause}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
         aria-roledescription="carousel"
       >
         {images.map((image, index) => (

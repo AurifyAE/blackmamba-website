@@ -7,6 +7,7 @@ import HomeCarousel from "./components/HomeCarousel";
 import ProductCard from "./components/ProductCard";
 import FeaturedProperties from "./components/FeaturedProperties";
 import Amenities from "./components/Amenities";
+import ContactNavbar from "./components/ContactNavbar";
 
 export default function Home() {
   
@@ -60,13 +61,15 @@ export default function Home() {
                 placeholder="Search by location, property, or brand"
                 className="flex-1 h-12 px-4 bg-white text-black border border-white/60 placeholder-black/60 text-sm sm:text-base"
               />
-              <button className="h-12 px-6 bg-[#E65C00] text-white border border-[#E65C00] hover:bg-[#CC4A00] transition-colors font-medium text-sm sm:text-base">Search</button>
+              <button className="h-12 px-4 bg-black text-white border-4 border-white hover:bg-[#A97C50] transition-all duration-500 font-medium text-sm sm:text-base">
+                <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
+              </button>
             </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
+      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-black">A Short Glimpse through the Properties</h2>
           <p className="mt-3 text-black/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">1, 2 & 3 Bedroom Luxurious and Modern Interiors Apartments with Stunning Views to buy, rent or for short stay In Dubai</p>
@@ -101,7 +104,7 @@ export default function Home() {
         />
       </div>
 
-      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
+      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto">
 
           {/* Product Cards Demo */}
@@ -161,7 +164,7 @@ export default function Home() {
 
       <Amenities />
 
-      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
+      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto">
           <FeaturedProperties />
         </div>
@@ -170,6 +173,7 @@ export default function Home() {
 
       <ContactForm />
       <Footer />
+      <ContactNavbar />
     </main>
   );
 }

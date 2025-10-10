@@ -1,35 +1,23 @@
 'use client'
-import { useState } from 'react'
+import { use, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 import Navbar from '../../components/Navbar'
 import Footer from '../../components/Footer'
 import Amenities from '@/app/components/Amenities'
 import PropertyMap from '@/app/components/PropertyMap'
+import { rentals, RentalProperty } from '../../../data/rentals'
 
-export default function RentalDetails({ params }: { params: { id: string } }) {
+export default function RentalDetails({ params }: { params: Promise<{ id: string }> }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const { id } = use(params);
+  // Find property by ID from the rentals data
+  const property = rentals.find((rental) => rental.id === id)
   
-  // Sample data - in real app, this would come from API based on params.id
-  const property = {
-    id: params.id,
-    buildingName: "Azizi Riviera",
-    price: "AED 1,200,000",
-    unit: "1 BEDROOM + 1 POWDER ROOM + 2 BATHS + 1 BALCONY",
-    suite: "674.79 SQ.FT",
-    balcony: "57.48 SQ.FT.",
-    total: "732.27 SQ.FT",
-    companyLogo: "/images/rental/sobhaone-logo.png",
-    companyName: "Azizi Developments",
-    projectDetails: "Sobha One redefines luxury living in Dubai with an exclusive blend of modern sophistication and lush surroundings. Spreads over five interlinked towers and strategically located near Ras Al Khor Wildlife Sanctuary; it provides seamless access to Dubai’s prime destinations. The project boasts unique amenities, including infinity pools, tranquil parks, a world-class fitness centre, and concierge services, ensuring a refined lifestyle. Sobha One is where luxury, convenience, and green spaces come together in perfect harmony, offering an unparalleled living experience.",
-    galleryImages: [
-      "/images/rental/sobhaone-gallery1.jpg",
-      "/images/rental/sobhaone-gallery2.jpg", 
-      "/images/rental/sobhaone-gallery3.jpg",
-      "/images/rental/sobhaone-gallery2.jpg",
-    ],
-    floorPlan: "/images/rental/floorplan.jpg",
-    fullWidthImage: "/images/rental/building-exterior.jpg"
+  // If property not found, show 404
+  if (!property) {
+    notFound()
   }
 
   return (
@@ -147,12 +135,12 @@ export default function RentalDetails({ params }: { params: { id: string } }) {
 
               {/* Right side - Floor Plan */}
               <div>
-                <div className="relative aspect-[4/3] overflow-hidden rounded-xl shadow-lg">
+                <div className="relative aspect-[5/4] overflow-hidden shadow-lg">
                   <Image
                     src={property.floorPlan}
                     alt={`${property.buildingName} - Floor Plan`}
                     fill
-                    className="object-cover"
+                    className="object-contain"
                   />
                 </div>
                 <div className="mt-4 text-center">
@@ -190,30 +178,15 @@ export default function RentalDetails({ params }: { params: { id: string } }) {
 
               {/* Right side - Property Features */}
               <div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                  Property Features
-                </h3>
-                <div className="space-y-0">
-                  <div className="py-3 border-b border-gray-200">
-                    <span className="text-gray-700 font-medium">8.5 Acres of Building Land Parcel</span>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Property Features</h3>
+              <div className="space-y-0">
+                {property.propertyFeatures.map((feature, index) => (
+                  <div key={index} className="py-3 border-b border-gray-200 last:border-b-0">
+                    <span className="text-gray-700 font-medium">{feature}</span>
                   </div>
-                  <div className="py-3 border-b border-gray-200">
-                    <span className="text-gray-700 font-medium">18 Hole Pitch & Putt Golf Course</span>
-                  </div>
-                  <div className="py-3 border-b border-gray-200">
-                    <span className="text-gray-700 font-medium">4 Themed Courtyards</span>
-                  </div>
-                  <div className="py-3 border-b border-gray-200">
-                    <span className="text-gray-700 font-medium">Courtyard for the senses</span>
-                  </div>
-                  <div className="py-3 border-b border-gray-200">
-                    <span className="text-gray-700 font-medium">Dine By the waters</span>
-                  </div>
-                  <div className="py-3">
-                    <span className="text-gray-700 font-medium">Fully Furnished Apartment, ready to move</span>
-                  </div>
-                </div>
+                ))}
               </div>
+            </div>
             </div>
           </div>
         </section>

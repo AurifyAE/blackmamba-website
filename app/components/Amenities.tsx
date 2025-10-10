@@ -11,7 +11,7 @@ const amenities = [
 
 const Amenities = () => {
   return (
-    <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
+    <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-black text-center">Building Amenities</h2>
           <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
