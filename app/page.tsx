@@ -113,7 +113,7 @@ export default function Home() {
             <p className="mt-3 text-black/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">Dubai's most exclusive properties — available to buy, rent, or enjoy on a short stay.</p>
           </div>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
             <ProductCard
               imageSrc="/images/carousel1.png"
               imageAlt="Sobha One"
@@ -158,6 +158,12 @@ export default function Home() {
               area="2,800"
               href="#"
             />
+          </div>
+          <div className="bg-black">
+              <div className="flex items-center justify-center gap-6 py-4 sm:py-6">
+              <p className="text-white">Contact us to discover whether our exclusive properties are available for purchase, rent, or short stays.</p>
+              <button className="bg-white px-6 py-2">Learn More</button>
+              </div>
           </div>
         </div>
       </section>
