@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -8,13 +8,17 @@ import ContactNavbar from '../components/ContactNavbar'
 import ProductCard from '../components/ProductCard'
 import { properties, Property } from '../../data/properties'
 
-export default function SearchPage() {
+// Force dynamic rendering
+export const dynamic = 'force-dynamic'
+
+function SearchContent() {
   const searchParams = useSearchParams()
   const [searchResults, setSearchResults] = useState<Property[]>([])
   const [loading, setLoading] = useState(true)
 
-  const query = searchParams.get('q') || ''
-  const category = searchParams.get('category') || 'rent'
+  // Safely get search params with fallbacks
+  const query = searchParams?.get('q') || ''
+  const category = searchParams?.get('category') || 'rent'
 
   useEffect(() => {
     setLoading(true)
@@ -108,5 +112,26 @@ export default function SearchPage() {
       <Footer />
       <ContactNavbar />
     </main>
+  )
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={
+      <main>
+        <Navbar />
+        <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
+          <div className="max-w-6xl mx-auto">
+            <div className="flex justify-center items-center py-12">
+              <div className="text-gray-500">Loading search results...</div>
+            </div>
+          </div>
+        </section>
+        <Footer />
+        <ContactNavbar />
+      </main>
+    }>
+      <SearchContent />
+    </Suspense>
   )
 }
