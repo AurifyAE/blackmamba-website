@@ -48,12 +48,13 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className='lg:flex justify-evenly items-center w-1/2 gap-3 hidden'>
+        <div className='lg:flex justify-evenly items-center w-1/2 gap-5 hidden'>
           <span className='cursor-pointer hover:text-gray-300 transition-colors'>Buy</span>
           <Link href="/rental"  className='cursor-pointer hover:text-gray-300 transition-colors'>Rent</Link>
           <span className='cursor-pointer hover:text-gray-300 transition-colors'>Short Stays</span>
           <Link href="/about" className="cursor-pointer hover:text-gray-300 transition-colors">About Us</Link>
           <Link href="/contact" className="cursor-pointer hover:text-gray-300 transition-colors">Contact</Link>
+          <Link href="/login" className="ml-4 cursor-pointer hover:text-gray-300 transition-colors">Register/ Sign in</Link>
         </div>
 
         {/* Hamburger icon */}

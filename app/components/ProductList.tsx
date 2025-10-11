@@ -66,19 +66,28 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
     propertyType: '',
     bedrooms: '',
     city: '',
-    minPrice: '',
-    maxPrice: ''
+    priceRange: '',
+    customMinPrice: '',
+    customMaxPrice: ''
   })
   
   const [sortBy, setSortBy] = useState('price-low')
   const [showMobileFilters, setShowMobileFilters] = useState(false)
 
   // Check if any filter is selected
-  const hasActiveFilters = filters.propertyType || filters.bedrooms || filters.city || filters.minPrice || filters.maxPrice
+  const hasActiveFilters = filters.propertyType || filters.bedrooms || filters.city || filters.priceRange || filters.customMinPrice || filters.customMaxPrice
 
-  const propertyTypes = ['All', 'Apartment', 'Villa', 'Penthouse', 'Studio']
-  const bedrooms = ['All', '1', '2', '3', '4+']
-  const cities = ['All', 'Dubai', 'Abu Dhabi', 'Sharjah']
+  const propertyTypes = ['', 'Apartment', 'Villa', 'Penthouse', 'Studio']
+  const bedrooms = ['', '1', '2', '3', '4+']
+  const cities = ['', 'Dubai', 'Abu Dhabi', 'Sharjah']
+  const priceRanges: Array<{ label: string; min: number; max: number }> = [
+    { label: 'Under AED 1M', min: 0, max: 1000000 },
+    { label: 'AED 1M - 2M', min: 1000000, max: 2000000 },
+    { label: 'AED 2M - 5M', min: 2000000, max: 5000000 },
+    { label: 'AED 5M - 10M', min: 5000000, max: 10000000 },
+    { label: 'Above AED 10M', min: 10000000, max: Infinity },
+    { label: 'Custom Range', min: 0, max: 0 } // Special case for custom input
+  ]
   const sortOptions = [
     { value: 'price-low', label: 'Price: Low to High' },
     { value: 'price-high', label: 'Price: High to Low' },
@@ -96,18 +105,35 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
 
   const filteredAndSortedProducts = products
     .filter(product => {
-      if (filters.propertyType && filters.propertyType !== 'All' && product.propertyType !== filters.propertyType) return false
-      if (filters.bedrooms && filters.bedrooms !== 'All' && product.beds.toString() !== filters.bedrooms) return false
-      if (filters.city && filters.city !== 'All' && product.city !== filters.city) return false
-      if (filters.minPrice) {
-        const price = parseInt(product.price.replace(/[^\d]/g, ''))
-        const minPrice = parseInt(filters.minPrice.replace(/[^\d]/g, ''))
-        if (price < minPrice) return false
-      }
-      if (filters.maxPrice) {
-        const price = parseInt(product.price.replace(/[^\d]/g, ''))
-        const maxPrice = parseInt(filters.maxPrice.replace(/[^\d]/g, ''))
-        if (price > maxPrice) return false
+      if (filters.propertyType && product.propertyType !== filters.propertyType) return false
+      if (filters.bedrooms && product.beds.toString() !== filters.bedrooms) return false
+      if (filters.city && product.city !== filters.city) return false
+      if (filters.priceRange) {
+        if (filters.priceRange === 'Custom Range') {
+          // Handle custom price range
+          if (filters.customMinPrice || filters.customMaxPrice) {
+            const price = parseInt(product.price.replace(/[^\d]/g, ''))
+            if (filters.customMinPrice) {
+              const minPrice = parseInt(filters.customMinPrice.replace(/[^\d]/g, ''))
+              if (price < minPrice) return false
+            }
+            if (filters.customMaxPrice) {
+              const maxPrice = parseInt(filters.customMaxPrice.replace(/[^\d]/g, ''))
+              if (price > maxPrice) return false
+            }
+          }
+        } else {
+          // Handle predefined price ranges
+          const selectedRange = priceRanges.find(range => range.label === filters.priceRange)
+          if (selectedRange) {
+            const price = parseInt(product.price.replace(/[^\d]/g, ''))
+            if (selectedRange.max === Infinity) {
+              if (price < selectedRange.min) return false
+            } else {
+              if (price < selectedRange.min || price > selectedRange.max) return false
+            }
+          }
+        }
       }
       return true
     })
@@ -134,17 +160,19 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
           {/* Desktop Layout */}
           <div className="hidden md:flex justify-between items-start gap-6 mb-6">
             {/* Left side - Filters */}
-            <div className="flex flex-wrap gap-4">
+            <div className="flex items-center gap-3">
+              <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Filter by</label>
+              <div className="flex flex-wrap gap-4">
               {/* Property Type Filter */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">Property Type</label>
                 <select
                   value={filters.propertyType}
                   onChange={(e) => handleFilterChange('propertyType', e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 >
-                  {propertyTypes.map(type => (
-                    <option key={type} value={type === 'All' ? '' : type}>
+                  <option value="">Property Type</option>
+                  {propertyTypes.slice(1).map(type => (
+                    <option key={type} value={type}>
                       {type}
                     </option>
                   ))}
@@ -153,15 +181,15 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
 
               {/* Bedrooms Filter */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
                 <select
                   value={filters.bedrooms}
                   onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 >
-                  {bedrooms.map(bed => (
-                    <option key={bed} value={bed === 'All' ? '' : bed}>
-                      {bed === 'All' ? 'All' : `${bed} Bed${bed === '4+' ? 's+' : bed !== '1' ? 's' : ''}`}
+                  <option value="">Bedrooms</option>
+                  {bedrooms.slice(1).map(bed => (
+                    <option key={bed} value={bed}>
+                      {bed === '4+' ? '4+ Beds' : `${bed} Bed${bed !== '1' ? 's' : ''}`}
                     </option>
                   ))}
                 </select>
@@ -169,41 +197,64 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
 
               {/* City Filter */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">City</label>
                 <select
                   value={filters.city}
                   onChange={(e) => handleFilterChange('city', e.target.value)}
                   className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 >
-                  {cities.map(city => (
-                    <option key={city} value={city === 'All' ? '' : city}>
+                  <option value="">City</option>
+                  {cities.slice(1).map(city => (
+                    <option key={city} value={city}>
                       {city}
                     </option>
                   ))}
                 </select>
               </div>
 
-              {/* Price Range */}
+              {/* Price Range Filter */}
               <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">Min Price</label>
-                <input
-                  type="text"
-                  placeholder="AED 500,000"
-                  value={filters.minPrice}
-                  onChange={(e) => handleFilterChange('minPrice', e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm w-32"
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label className="text-sm font-medium text-gray-700 mb-2">Max Price</label>
-                <input
-                  type="text"
-                  placeholder="AED 10,000,000"
-                  value={filters.maxPrice}
-                  onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
-                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm w-32"
-                />
+                <select
+                  value={filters.priceRange}
+                  onChange={(e) => {
+                    handleFilterChange('priceRange', e.target.value)
+                    // Clear custom inputs when switching away from Custom Range
+                    if (e.target.value !== 'Custom Range') {
+                      setFilters(prev => ({
+                        ...prev,
+                        customMinPrice: '',
+                        customMaxPrice: ''
+                      }))
+                    }
+                  }}
+                  className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
+                >
+                  <option value="">Price</option>
+                  {priceRanges.map(range => (
+                    <option key={range.label} value={range.label}>
+                      {range.label}
+                    </option>
+                  ))}
+                </select>
+                
+                {/* Custom Price Inputs - Show when Custom Range is selected */}
+                {filters.priceRange === 'Custom Range' && (
+                  <div className="flex gap-2 mt-2">
+                    <input
+                      type="text"
+                      placeholder="Min Price (AED)"
+                      value={filters.customMinPrice}
+                      onChange={(e) => handleFilterChange('customMinPrice', e.target.value)}
+                      className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm w-32"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Max Price (AED)"
+                      value={filters.customMaxPrice}
+                      onChange={(e) => handleFilterChange('customMaxPrice', e.target.value)}
+                      className="px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm w-32"
+                    />
+                  </div>
+                )}
               </div>
 
               {/* Clear Filters Button - Only show when filters are active */}
@@ -214,8 +265,9 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                       propertyType: '',
                       bedrooms: '',
                       city: '',
-                      minPrice: '',
-                      maxPrice: ''
+                      priceRange: '',
+                      customMinPrice: '',
+                      customMaxPrice: ''
                     })}
                     className="px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm font-medium whitespace-nowrap"
                   >
@@ -223,11 +275,12 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                   </button>
                 </div>
               )}
+              </div>
             </div>
 
             {/* Right side - Sorting */}
-            <div className="flex flex-col">
-              <label className="text-sm font-medium text-gray-700 mb-2">Sort By</label>
+            <div className="flex items-center gap-3">
+              <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Sort By</label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
@@ -256,7 +309,7 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                  Filters & Sort
                  {hasActiveFilters && (
                    <span className="bg-white text-[#A97C50] rounded-full px-2 py-1 text-xs font-bold">
-                     {[filters.propertyType, filters.bedrooms, filters.city, filters.minPrice, filters.maxPrice].filter(Boolean).length}
+                     {[filters.propertyType, filters.bedrooms, filters.city, filters.priceRange, filters.customMinPrice, filters.customMaxPrice].filter(Boolean).length}
                    </span>
                  )}
                </button>
@@ -272,14 +325,14 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                <div className="bg-white border border-gray-200 rounded-lg p-4 space-y-4 shadow-lg">
                  {/* Property Type */}
                  <div>
-                   <label className="block text-sm font-medium text-gray-700 mb-2">Property Type</label>
                    <select
                      value={filters.propertyType}
                      onChange={(e) => handleFilterChange('propertyType', e.target.value)}
                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
                    >
-                     {propertyTypes.map(type => (
-                       <option key={type} value={type === 'All' ? '' : type}>
+                     <option value="">Property Type</option>
+                     {propertyTypes.slice(1).map(type => (
+                       <option key={type} value={type}>
                          {type}
                        </option>
                      ))}
@@ -288,15 +341,15 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
 
                  {/* Bedrooms */}
                  <div>
-                   <label className="block text-sm font-medium text-gray-700 mb-2">Bedrooms</label>
                    <select
                      value={filters.bedrooms}
                      onChange={(e) => handleFilterChange('bedrooms', e.target.value)}
                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
                    >
-                     {bedrooms.map(bed => (
-                       <option key={bed} value={bed === 'All' ? '' : bed}>
-                         {bed === 'All' ? 'All' : `${bed} Bed${bed === '4+' ? 's+' : bed !== '1' ? 's' : ''}`}
+                     <option value="">Bedrooms</option>
+                     {bedrooms.slice(1).map(bed => (
+                       <option key={bed} value={bed}>
+                         {bed === '4+' ? '4+ Beds' : `${bed} Bed${bed !== '1' ? 's' : ''}`}
                        </option>
                      ))}
                    </select>
@@ -304,14 +357,14 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
 
                  {/* City */}
                  <div>
-                   <label className="block text-sm font-medium text-gray-700 mb-2">City</label>
                    <select
                      value={filters.city}
                      onChange={(e) => handleFilterChange('city', e.target.value)}
                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
                    >
-                     {cities.map(city => (
-                       <option key={city} value={city === 'All' ? '' : city}>
+                     <option value="">City</option>
+                     {cities.slice(1).map(city => (
+                       <option key={city} value={city}>
                          {city}
                        </option>
                      ))}
@@ -319,36 +372,58 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                  </div>
 
                  {/* Price Range */}
-                 <div className="grid grid-cols-2 gap-3">
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-2">Min Price</label>
-                     <input
-                       type="text"
-                       placeholder="AED 500,000"
-                       value={filters.minPrice}
-                       onChange={(e) => handleFilterChange('minPrice', e.target.value)}
-                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
-                     />
-                   </div>
-                   <div>
-                     <label className="block text-sm font-medium text-gray-700 mb-2">Max Price</label>
-                     <input
-                       type="text"
-                       placeholder="AED 10,000,000"
-                       value={filters.maxPrice}
-                       onChange={(e) => handleFilterChange('maxPrice', e.target.value)}
-                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
-                     />
-                   </div>
+                 <div>
+                   <select
+                     value={filters.priceRange}
+                     onChange={(e) => {
+                       handleFilterChange('priceRange', e.target.value)
+                       // Clear custom inputs when switching away from Custom Range
+                       if (e.target.value !== 'Custom Range') {
+                         setFilters(prev => ({
+                           ...prev,
+                           customMinPrice: '',
+                           customMaxPrice: ''
+                         }))
+                       }
+                     }}
+                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
+                   >
+                     <option value="">Price</option>
+                     {priceRanges.map(range => (
+                       <option key={range.label} value={range.label}>
+                         {range.label}
+                       </option>
+                     ))}
+                   </select>
+                   
+                   {/* Custom Price Inputs - Show when Custom Range is selected */}
+                   {filters.priceRange === 'Custom Range' && (
+                     <div className="grid grid-cols-2 gap-3 mt-3">
+                       <input
+                         type="text"
+                         placeholder="Min Price (AED)"
+                         value={filters.customMinPrice}
+                         onChange={(e) => handleFilterChange('customMinPrice', e.target.value)}
+                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
+                       />
+                       <input
+                         type="text"
+                         placeholder="Max Price (AED)"
+                         value={filters.customMaxPrice}
+                         onChange={(e) => handleFilterChange('customMaxPrice', e.target.value)}
+                         className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
+                       />
+                     </div>
+                   )}
                  </div>
 
                  {/* Sort By */}
-                 <div>
-                   <label className="block text-sm font-medium text-gray-700 mb-2">Sort By</label>
+                 <div className="flex items-center gap-3">
+                   <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Sort By</label>
                    <select
                      value={sortBy}
                      onChange={(e) => setSortBy(e.target.value)}
-                     className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
+                     className="flex-1 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] text-sm"
                    >
                      {sortOptions.map(option => (
                        <option key={option.value} value={option.value}>
@@ -367,8 +442,9 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                            propertyType: '',
                            bedrooms: '',
                            city: '',
-                           minPrice: '',
-                           maxPrice: ''
+                           priceRange: '',
+                           customMinPrice: '',
+                           customMaxPrice: ''
                          })
                        }}
                        className="flex-1 px-4 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 transition-colors text-sm font-medium"
@@ -444,8 +520,9 @@ export default function ProductList({ products = rentalProducts }: ProductListPr
                 propertyType: '',
                 bedrooms: '',
                 city: '',
-                minPrice: '',
-                maxPrice: ''
+                priceRange: '',
+                customMinPrice: '',
+                customMaxPrice: ''
               })}
               className="mt-4 px-6 py-2 bg-[#A97C50] text-white rounded-md hover:bg-[#8B6B42] transition-colors"
             >

@@ -8,6 +8,8 @@ import ProductCard from "./components/ProductCard";
 import FeaturedProperties from "./components/FeaturedProperties";
 import Amenities from "./components/Amenities";
 import ContactNavbar from "./components/ContactNavbar";
+import SearchBar from "./components/SearchBar";
+import { properties } from "../data/properties";
 
 export default function Home() {
   
@@ -47,24 +49,10 @@ export default function Home() {
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-white text-4xl md:text-6xl font-semibold tracking-tight">Elevate Your Lifestyle</h1>
           <p className="mt-4 text-white/90 text-base md:text-lg">Discover exclusive homes, flexible rentals, and luxury stays all under one iconic brand</p>
-          {/* Top-right buttons over the hero */}
-          <div className="mt-6 w-full max-w-4xl mx-auto flex justify-start px-2">
-            <span className="px-4 py-2 text-sm md:text-base bg-white text-black">Buy</span>
-            <span className="px-4 py-2 text-sm md:text-base bg-black text-white">Rent</span>
-            <span className="px-4 py-2 text-sm md:text-base bg-[#A97C50] text-white">Short Stays</span>
-          </div>
-          {/* Search bar */}
-          <div className="w-full max-w-4xl mx-auto px-2">
-            <div className="flex w-full">
-              <input
-                type="text"
-                placeholder="Search by location, property, or brand"
-                className="flex-1 h-12 px-4 bg-white text-black border border-white/60 placeholder-black/60 text-sm sm:text-base"
-              />
-              <button className="h-12 px-4 bg-black text-white border-4 border-white hover:bg-[#A97C50] transition-all duration-500 font-medium text-sm sm:text-base">
-                <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
-              </button>
-            </div>
+          
+          {/* Search Bar Component */}
+          <div className="mt-6">
+            <SearchBar />
           </div>
         </div>
       </section>
@@ -114,50 +102,22 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
-            <ProductCard
-              imageSrc="/images/carousel1.png"
-              imageAlt="Sobha One"
-              price="AED 1,895,000"
-              title="Sobha One"
-              location="Business Bay, Dubai"
-              beds={1}
-              baths={2}
-              area="1,030"
-              href="#"
-            />
-            <ProductCard
-              imageSrc="/images/product-dunya-tower-dubai.png"
-              imageAlt="Dunya Tower"
-              price="AED 2,450,000"
-              title="Dunya Tower"
-              location="Downtown Dubai"
-              beds={2}
-              baths={3}
-              area="1,450"
-              href="#"
-            />
-            <ProductCard
-              imageSrc="/images/product-azizi-developments-dubai.png"
-              imageAlt="Azizi Developments"
-              price="AED 5,200,000"
-              title="Azizi Developments"
-              location="Dubai Marina"
-              beds={3}
-              baths={4}
-              area="2,800"
-              href="#"
-            />
-            <ProductCard
-              imageSrc="/images/product-azizi-developments-dubai.png"
-              imageAlt="Palm Villa"
-              price="AED 5,200,000"
-              title="Palm Villa"
-              location="Jumeirah, Dubai"
-              beds={3}
-              baths={4}
-              area="2,800"
-              href="#"
-            />
+            {properties.slice(0, 4).map((property) => (
+              <ProductCard
+                key={property.id}
+                imageSrc={property.imageSrc}
+                imageAlt={property.imageAlt}
+                price={property.buyPrice || property.rentPrice || property.shortStayPrice || 'Price on request'}
+                title={property.title}
+                location={property.location}
+                beds={property.beds}
+                baths={property.baths}
+                area={property.area}
+                href={`/property/${property.id}`}
+                property={property}
+                showButtons={true}
+              />
+            ))}
           </div>
           <div className="bg-black">
               <div className="flex items-center justify-center gap-6 py-4 sm:py-6">

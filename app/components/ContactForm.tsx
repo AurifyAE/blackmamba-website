@@ -36,8 +36,38 @@ export default function ContactForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log({ ...formData, phone });
-    // Handle form submission here
+    
+    // Prepare the email content
+    const emailSubject = encodeURIComponent("Property Inquiry - Black Mamba");
+    const emailBody = encodeURIComponent(`
+Hello,
+
+I am interested in learning more about your properties. Here are my details:
+
+Name: ${formData.firstName} ${formData.lastName}
+Email: ${formData.email}
+Phone: ${phone}
+Unit Type: ${formData.unitType}
+Preferred Contact Mode: ${formData.contactMode}
+
+Additional Information:
+- Privacy Policy Accepted: ${formData.privacyPolicy ? 'Yes' : 'No'}
+- Newsletter Subscription: ${formData.newsletter ? 'Yes' : 'No'}
+
+Please contact me at your earliest convenience.
+
+Best regards,
+${formData.firstName} ${formData.lastName}
+    `.trim());
+
+    // Create Gmail compose URL
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=info@blackmamba.com&su=${emailSubject}&body=${emailBody}`;
+    
+    // Open Gmail in a new tab
+    window.open(gmailUrl, '_blank');
+    
+    // Optional: Show success message
+    alert('Redirecting to Gmail to send your inquiry...');
   };
 
   return (

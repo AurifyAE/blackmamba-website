@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import clsx from 'clsx'
+import { Property } from '../../data/properties'
 
 type ProductCardProps = {
   imageSrc: string
@@ -15,6 +16,8 @@ type ProductCardProps = {
   href?: string
   onClick?: () => void
   className?: string
+  property?: Property
+  showButtons?: boolean
 }
 
 export default function ProductCard({
@@ -28,8 +31,46 @@ export default function ProductCard({
   area, 
   href, 
   onClick, 
-  className
+  className,
+  property,
+  showButtons = false
 }: ProductCardProps) {
+  const getActionButtons = () => {
+    if (!showButtons || !property) return null
+
+    return (
+      <div className="absolute top-2 right-2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+        {property.availableFor.includes('buy') && property.buyPrice && (
+          <Link 
+            href={`/buy/${property.id}`}
+            className="bg-[#A97C50] text-white px-2 py-1 text-xs rounded hover:bg-[#8B6B42] transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Buy
+          </Link>
+        )}
+        {property.availableFor.includes('rent') && property.rentPrice && (
+          <Link 
+            href={`/rent/${property.id}`}
+            className="bg-black text-white px-2 py-1 text-xs rounded hover:bg-gray-800 transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Rent
+          </Link>
+        )}
+        {property.availableFor.includes('shortstay') && property.shortStayPrice && (
+          <Link 
+            href={`/short-stay/${property.id}`}
+            className="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700 transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            Short Stay
+          </Link>
+        )}
+      </div>
+    )
+  }
+
   const content = (
     <div className={clsx('relative aspect-square overflow-hidden group', className)} onClick={onClick}>
       <Image 
@@ -39,6 +80,10 @@ export default function ProductCard({
         className="object-cover transition-transform duration-300 group-hover:scale-[1.02]" 
       />
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      
+      {/* Action Buttons */}
+      {getActionButtons()}
+      
       <div className="absolute inset-x-2 sm:inset-x-3 bottom-2 sm:bottom-3 flex items-end justify-between gap-2 sm:gap-3">
         <div className="text-white flex-1 min-w-0">
           <div className="text-base sm:text-lg font-bold leading-tight">{price}</div>

@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import ContactForm from "../components/ContactForm";
 import ProductList from "../components/ProductList";
 import FeaturedProperties from "../components/FeaturedProperties";
+import SearchBar from "../components/SearchBar";
 
 export default function Rental() {
   return (
@@ -21,25 +22,8 @@ export default function Rental() {
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 mb-18">
-          {/* Top-right buttons over the hero */}
-          <div className="mt-6 w-full max-w-4xl mx-auto flex justify-start px-2">
-            <span className="px-4 py-2 text-sm md:text-base bg-white text-black">Buy</span>
-            <span className="px-4 py-2 text-sm md:text-base bg-black text-white">Rent</span>
-            <span className="px-4 py-2 text-sm md:text-base bg-[#A97C50] text-white">Short Stays</span>
-          </div>
-          {/* Search bar */}
-          <div className="w-full max-w-4xl mx-auto px-2">
-            <div className="flex w-full">
-              <input
-                type="text"
-                placeholder="Search by location, property, or brand"
-                className="flex-1 h-12 px-4 bg-white text-black border border-white/60 placeholder-black/60"
-              />
-              <button className="h-12 px-4 bg-black text-white border-4 border-white hover:bg-[#A97C50] transition-all duration-500 font-medium text-sm sm:text-base">
-                <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
-              </button>
-            </div>
-          </div>
+          {/* Search Bar Component */}
+          <SearchBar />
           <h1 className="text-white text-4xl md:text-6xl max-w-xl font-semibold leading-16 mt-8">Where Happiness Finds a Home</h1>
         </div>
       </section>
