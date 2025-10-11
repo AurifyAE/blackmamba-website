@@ -38,34 +38,38 @@ export default function ProductCard({
   const getActionButtons = () => {
     if (!showButtons || !property) return null
 
+    const handleActionClick = (action: string, e: React.MouseEvent) => {
+      e.preventDefault()
+      e.stopPropagation()
+      // Navigate programmatically to avoid nested links
+      window.location.href = `/${action}/${property.id}`
+    }
+
     return (
       <div className="absolute top-2 right-2 flex flex-col gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
         {property.availableFor.includes('buy') && property.buyPrice && (
-          <Link 
-            href={`/buy/${property.id}`}
+          <button 
+            onClick={(e) => handleActionClick('buy', e)}
             className="bg-[#A97C50] text-white px-2 py-1 text-xs rounded hover:bg-[#8B6B42] transition-colors"
-            onClick={(e) => e.stopPropagation()}
           >
             Buy
-          </Link>
+          </button>
         )}
         {property.availableFor.includes('rent') && property.rentPrice && (
-          <Link 
-            href={`/rent/${property.id}`}
+          <button 
+            onClick={(e) => handleActionClick('rent', e)}
             className="bg-black text-white px-2 py-1 text-xs rounded hover:bg-gray-800 transition-colors"
-            onClick={(e) => e.stopPropagation()}
           >
             Rent
-          </Link>
+          </button>
         )}
         {property.availableFor.includes('shortstay') && property.shortStayPrice && (
-          <Link 
-            href={`/short-stay/${property.id}`}
+          <button 
+            onClick={(e) => handleActionClick('short-stay', e)}
             className="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700 transition-colors"
-            onClick={(e) => e.stopPropagation()}
           >
             Short Stay
-          </Link>
+          </button>
         )}
       </div>
     )
