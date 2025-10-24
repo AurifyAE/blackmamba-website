@@ -3,8 +3,8 @@
 type PropertyMapProps = {
   title?: string
   property?: {
-    embedUrl: string
-    walkingDistances: Array<{ location: string; time: string }>
+    embedUrl?: string
+    nearbyLocations?: Array<{ location: string; time: string }>
   }
 }
 
@@ -12,7 +12,7 @@ export default function PropertyMap({
   title = "Elite Living Aminities",
   property
 }: PropertyMapProps) {
-  const walkingDistances = property?.walkingDistances || [
+  const walkingDistances = property?.nearbyLocations || [
     { location: "Dubai Mall & Burj Khalifa", time: "5 mins Walk" },
     { location: "Dubai Fountain", time: "3 mins Walk" },
     { location: "Dubai Aquarium", time: "4 mins Walk" },
