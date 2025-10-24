@@ -57,7 +57,7 @@ export default function ProductCard({
         )}
         {property.availableFor.includes('rent') && property.rentPrice && (
           <button 
-            onClick={(e) => handleActionClick('rent', e)}
+            onClick={(e) => handleActionClick('rental', e)}
             className="bg-black text-white px-2 py-1 text-xs rounded hover:bg-gray-800 transition-colors"
           >
             Rent

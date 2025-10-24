@@ -40,7 +40,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
             onClick={() => setSelectedCategory('buy')}
             className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
               selectedCategory === 'buy'
-                ? 'bg-white text-black shadow'
+                ? 'bg-[#A97C50]/50 text-white shadow'
                 : 'bg-transparent text-white hover:bg-white/20'
             }`}
             style={{ borderRight: '1px solid rgba(255,255,255,0.11)' }}
@@ -51,7 +51,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
             onClick={() => setSelectedCategory('rent')}
             className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
               selectedCategory === 'rent'
-                ? 'bg-white text-black shadow'
+                ? 'bg-[#A97C50]/50 text-white shadow'
                 : 'bg-transparent text-white hover:bg-white/20'
             }`}
             style={{ borderRight: '1px solid rgba(255,255,255,0.11)' }}
@@ -62,7 +62,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
             onClick={() => setSelectedCategory('shortstay')}
             className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
               selectedCategory === 'shortstay'
-                ? 'bg-white text-black shadow'
+                ? 'bg-[#A97C50]/50 text-white shadow'
                 : 'bg-transparent text-white hover:bg-white/20'
             }`}
           >
@@ -79,12 +79,18 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             onKeyPress={handleKeyPress}
-            placeholder="Search by location, property, or brand"
+            placeholder={
+              selectedCategory === 'buy'
+                ? 'Search properties to buy is coming soon'
+                : selectedCategory === 'rent'
+                ? 'Search rental properties by location, property, or brand'
+                : 'Search short stay properties is coming soon'
+            }
             className="flex-1 h-12 px-4 bg-white text-black border border-white/60 placeholder-black/60 text-sm sm:text-base"
           />
           <button 
             onClick={handleSearch}
-            className="h-12 px-4 bg-black text-white border-4 border-white hover:bg-[#A97C50] transition-all duration-500 font-medium text-sm sm:text-base"
+            className="h-12 px-4 bg-[#A97C50] text-white border-4 border-white hover:bg-black transition-all duration-500 font-medium text-sm sm:text-base"
           >
             <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
           </button>

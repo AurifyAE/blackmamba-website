@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { rentals, RentalProperty } from '../../data/rentals'
+import { properties, Property } from '../../data/properties'
 
 interface Product {
   id: string
@@ -14,6 +14,7 @@ interface Product {
   location: string
   beds: number
   baths: number
+  balconyQty: number
   area: string
   propertyType: string
   city: string
@@ -24,44 +25,55 @@ interface ProductListProps {
   products?: Product[]
 }
 
-// Transform rental data to match Product interface
-const rentalProducts: Product[] = rentals.map((rental: RentalProperty) => {
-  // Extract beds and baths from unit string
-  const bedsMatch = rental.unit.match(/(\d+)\s*BEDROOM/i)
-  const bathsMatch = rental.unit.match(/(\d+(?:\.\d+)?)\s*BATH/i)
+// Transform properties data to match Product interface
+const propertyProducts: Product[] = properties.map((property: Property) => {
   
-  const beds = bedsMatch ? parseInt(bedsMatch[1]) : 3
-  const baths = bathsMatch ? Math.ceil(parseFloat(bathsMatch[1])) : 2
+  const beds = property.beds
+  const baths = property.baths
+  const balconyQty = property.balconyQty || 0
   
-  // Extract area from suite string (remove "SQ.FT" and any other text)
-  const areaMatch = rental.suite.match(/(\d+(?:\.\d+)?)/)
-  const area = areaMatch ? areaMatch[1] : '1,265'
-  
-  // Determine location based on building name
-  let location = 'Dubai'
-  if (rental.buildingName.toLowerCase().includes('canal')) {
-    location = 'Business Bay, Dubai'
-  } else if (rental.buildingName.toLowerCase().includes('dunya')) {
-    location = 'Downtown Dubai'
+  // Use area from property or extract from suite if available
+  let area = property.area
+  if (property.suite) {
+    const areaMatch = property.suite.match(/(\d+(?:\.\d+)?)/)
+    area = areaMatch ? areaMatch[1] : property.area
   }
   
+  // Determine property type based on available options
+  let propertyType = 'Apartment'
+  if (property.availableFor.includes('buy')) {
+    propertyType = 'Villa'
+  }
+  
+  // Determine city from location
+  let city = 'Dubai'
+  if (property.location.includes('Abu Dhabi')) {
+    city = 'Abu Dhabi'
+  } else if (property.location.includes('Sharjah')) {
+    city = 'Sharjah'
+  }
+  
+  // Use appropriate price based on availability
+  let price = property.rentPrice || property.buyPrice || property.shortStayPrice || 'Price on Request'
+  
   return {
-    id: rental.id,
-    imageSrc: rental.galleryImages[0], // Use first gallery image as main image
-    imageAlt: rental.buildingName,
-    price: rental.price,
-    title: rental.buildingName,
-    location: location,
+    id: property.id,
+    imageSrc: property.imageSrc,
+    imageAlt: property.imageAlt,
+    price: price,
+    title: property.title,
+    location: property.location,
     beds: beds,
     baths: baths,
+    balconyQty: balconyQty,
     area: area,
-    propertyType: 'Apartment',
-    city: 'Dubai',
-    href: `/rental/${rental.id}`
+    propertyType: propertyType,
+    city: city,
+    href: `/rental/${property.id}`
   }
 })
 
-export default function ProductList({ products = rentalProducts }: ProductListProps) {
+export default function ProductList({ products = propertyProducts }: ProductListProps) {
   const [filters, setFilters] = useState({
     propertyType: '',
     bedrooms: '',

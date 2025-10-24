@@ -15,7 +15,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Enter your email to receive updates"
-                className="flex-1 px-4 py-3 rounded-4xl border border-white focus:outline-none focus:ring-2 focus:ring-white/50 text-gray-700 text-sm sm:text-base"
+                className="flex-1 px-4 py-3 rounded-4xl border border-white focus:outline-none focus:ring-2 focus:ring-white/50 text-gray-300 text-sm sm:text-base"
               />
               <button className="bg-white text-[#A97C50] px-6 py-3 rounded-4xl font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base">
                 Learn More

@@ -1,10 +1,18 @@
 //data/rentals.ts
 
+export interface nearbyLocations {
+  location: string;
+  time: string;
+}
+
 export interface RentalProperty {
     id: string;
     buildingName: string;
     price: string;
     unit: string;
+    beds: number;
+    baths: number;
+    balconyQty: number;
     suite: string;
     balcony: string;
     total: string;
@@ -16,13 +24,7 @@ export interface RentalProperty {
     fullWidthImage: string;
     propertyFeatures: string[];
     embedUrl: string;
-    categoryEmbeds: {
-      schools: string;
-      shop: string;
-      dine: string;
-      grocery: string;
-      attractions: string;
-    };
+    nearbyLocations: nearbyLocations[];
   }
   
   export const rentals: RentalProperty[] = [
@@ -31,6 +33,9 @@ export interface RentalProperty {
       buildingName: "Canal Bay by Ned",
       price: "AED 1,200,000",
       unit: "3 BEDROOM + 2.5 BATHS + 1 BALCONY",
+      beds: 3,
+      baths: 2.5,
+      balconyQty: 1,
       suite: "1265.9 SQ.FT",
       balcony: "183.1 SQ.FT.",
       total: "1449.0 SQ.FT",
@@ -69,20 +74,25 @@ export interface RentalProperty {
         "Dine By the waters",
         "Fully Furnished Apartment, ready to move",
       ],
-      embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6a2b1c3d4e5f%3A0x1234567890abcdef!2sBusiness%20Bay%2C%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1700000000001!5m2!1sen!2sae",
-      categoryEmbeds: {
-        schools: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sschools%20near%20Business%20Bay%20Dubai!5e0!3m2!1sen!2sae!4v1700000001001!5m2!1sen!2sae",
-        shop: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sshopping%20malls%20near%20Business%20Bay%20Dubai!5e0!3m2!1sen!2sae!4v1700000001002!5m2!1sen!2sae",
-        dine: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srestaurants%20near%20Business%20Bay%20Dubai!5e0!3m2!1sen!2sae!4v1700000001003!5m2!1sen!2sae",
-        grocery: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sgrocery%20stores%20near%20Business%20Bay%20Dubai!5e0!3m2!1sen!2sae!4v1700000001004!5m2!1sen!2sae",
-        attractions: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.1234567890123!2d55.2678!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sattractions%20near%20Business%20Bay%20Dubai!5e0!3m2!1sen!2sae!4v1700000001005!5m2!1sen!2sae"
-      }
+      embedUrl: "https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1760423800056!5m2!1sen!2sin!6m8!1m7!1seU0SZPlgXJIiKrM-Nm-1Dw!2m2!1d25.18154776161165!2d55.27667684143006!3f20.27736453779439!4f39.06276438296891!5f0.6757526525828232",
+      nearbyLocations: [
+        { location: "Dubai Mall & Burj Khalifa", time: "5 mins Walk" },
+        { location: "Dubai Fountain", time: "3 mins Walk" },
+        { location: "Dubai Aquarium", time: "4 mins Walk" },
+        { location: "Dubai Opera", time: "6 mins Walk" },
+        { location: "Business Bay Metro Station", time: "8 mins Walk" },
+        { location: "Dubai International Financial Centre", time: "10 mins Walk" }
+      ],
+        
     },
     {
         id: "dunya-tower",
         buildingName: "Dunya Tower by Emirates Properties",
         price: "AED 1,200,000",
         unit: "3 BEDROOM + 3 BATHS + 2 BALCONY",
+        beds: 3,
+        baths: 3,
+        balconyQty: 2,
         suite: "1265.9 SQ.FT",
         balcony: "183.1 SQ.FT.",
         total: "1449.0 SQ.FT",
@@ -120,14 +130,71 @@ export interface RentalProperty {
           "Tranquility Lifestyle",
           "A Perfect Efficient Home Design",
         ],
-        embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6a2b1c3d4e5f%3A0xabcdef1234567890!2sDowntown%20Dubai%20-%20United%20Arab%20Emirates!5e0!3m2!1sen!2sae!4v1700000000002!5m2!1sen!2sae",
-        categoryEmbeds: {
-          schools: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sschools%20near%20Downtown%20Dubai!5e0!3m2!1sen!2sae!4v1700000002001!5m2!1sen!2sae",
-          shop: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sshopping%20malls%20near%20Downtown%20Dubai!5e0!3m2!1sen!2sae!4v1700000002002!5m2!1sen!2sae",
-          dine: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1srestaurants%20near%20Downtown%20Dubai!5e0!3m2!1sen!2sae!4v1700000002003!5m2!1sen!2sae",
-          grocery: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sgrocery%20stores%20near%20Downtown%20Dubai!5e0!3m2!1sen!2sae!4v1700000002004!5m2!1sen!2sae",
-          attractions: "https://www.google.com/maps/embed?pb=!1m16!1m12!1m3!1d3610.9876543210987!2d55.2744!3d25.1972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!2m1!1sattractions%20near%20Downtown%20Dubai!5e0!3m2!1sen!2sae!4v1700000002005!5m2!1sen!2sae"
-        }
+        embedUrl: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d115542.12665604343!2d55.283109!3d25.179894!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f69f234ed44c9%3A0xc0c30b7b9d205885!2sDunya%20Tower!5e0!3m2!1sen!2sus!4v1760423231042!5m2!1sen!2sus",
+        nearbyLocations: [
+          { location: "Dubai Mall & Burj Khalifa", time: "5 mins Walk" },
+          { location: "Burj al Arab", time: "18 mins" },
+          { location: "Dubai International Airport", time: "14 mins" },
+          { location: "24 mins Walk to JBR", time: "3 mins Walk" },
+          { location: "Burj Khalifa Metro Station", time: "4 mins Walk" },
+          { location: "Dubai International Financial Centre", time: "5 mins Walk" }
+        ]
       },
+      {
+        id: "sobha-waves",
+        buildingName: "Sobha Waves",
+        price: "AED 1,200,000",
+        unit: "3 BEDROOM + 2.5 BATHS + 1 BALCONY",
+        beds: 3,
+        baths: 2.5,
+        balconyQty: 1,
+        suite: "1265.9 SQ.FT",
+        balcony: "183.1 SQ.FT.",
+        total: "1449.0 SQ.FT",
+        companyLogo: "/images/rental/sobhaone-logo.png",
+        companyName: "Sobha Developments",
+        projectDetails:
+          "Located in Business Bay, this brand new - ready for occupancy apartment building features state-of-the-art amenities and well-polished and elegantly crafted interior designs. Offering 2 and 3-bedroom apartments, Canal Bay offers a modern and luxurious living space for you and your loved ones.",
+        galleryImages: [
+          "/images/rental/canalbay/canalbay-1.jpeg",
+          "/images/rental/canalbay/canalbay-2.jpeg",
+          "/images/rental/canalbay/canalbay-3.jpeg",
+          "/images/rental/canalbay/canalbay-4.jpeg",
+          "/images/rental/canalbay/canalbay-5.jpeg",
+          "/images/rental/canalbay/canalbay-6.jpeg",
+          "/images/rental/canalbay/canalbay-7.jpeg",
+          "/images/rental/canalbay/canalbay-8.jpeg",
+          "/images/rental/canalbay/canalbay-9.jpeg",
+          "/images/rental/canalbay/canalbay-10.jpeg",
+          "/images/rental/canalbay/canalbay-11.jpeg",
+          "/images/rental/canalbay/canalbay-12.jpeg",
+          "/images/rental/canalbay/canalbay-13.jpeg",
+          "/images/rental/canalbay/canalbay-14.jpeg",
+          "/images/rental/canalbay/canalbay-15.jpeg",
+          "/images/rental/canalbay/canalbay-16.jpeg",
+          "/images/rental/canalbay/canalbay-17.jpeg",
+          "/images/rental/canalbay/canalbay-19.jpeg",
+          "/images/rental/canalbay/canalbay-20.jpeg",
+        ],
+        floorPlan: "/images/rental/canalbay/floorplan-1702.jpg",
+        fullWidthImage: "/images/rental/building-exterior.jpg",
+        propertyFeatures: [
+          "8.5 Acres of Building Land Parcel",
+          "18 Hole Pitch & Putt Golf Course",
+          "4 Themed Courtyards",
+          "Courtyard for the senses",
+          "Dine By the waters",
+          "Fully Furnished Apartment, ready to move",
+        ],
+        embedUrl: "https://www.google.com/maps/embed?pb=!3m2!1sen!2sin!4v1760423800056!5m2!1sen!2sin!6m8!1m7!1seU0SZPlgXJIiKrM-Nm-1Dw!2m2!1d25.18154776161165!2d55.27667684143006!3f20.27736453779439!4f39.06276438296891!5f0.6757526525828232",
+        nearbyLocations: [
+          { location: "Dubai Mall & Burj Khalifa", time: "5 mins Walk" },
+          { location: "Dubai Fountain", time: "3 mins Walk" },
+          { location: "Dubai Aquarium", time: "4 mins Walk" },
+          { location: "Dubai Opera", time: "6 mins Walk" },
+          { location: "Business Bay Metro Station", time: "8 mins Walk" },
+          { location: "Dubai International Financial Centre", time: "10 mins Walk" }
+        ],
+          
+      }
   ];
-  
