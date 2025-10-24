@@ -40,7 +40,7 @@ export const properties: Property[] = [
     baths: 2.5,
     area: "1,265.9",
     availableFor: ['rent'],
-    rentPrice: "AED 1,200,000",
+    rentPrice: "180,000 - 200,000",
     shortStayPrice: "AED 3,333/night",
     description: "Located in Business Bay, this brand new - ready for occupancy apartment building features state-of-the-art amenities and well-polished and elegantly crafted interior designs. Offering 2 and 3-bedroom apartments, Canal Bay offers a modern and luxurious living space for you and your loved ones.",
     features: [
@@ -101,7 +101,7 @@ export const properties: Property[] = [
     baths: 3,
     area: "1,265.9",
     availableFor: ['rent'],
-    rentPrice: "AED 1,200,000",
+    rentPrice: "220,000 - 280,000",
     shortStayPrice: "AED 3,333/night",
     description: "Dunya Tower is the new modern residential project set within the magnificent Downtown Dubai. It is strategically located and connected to the prestigious DIFC, one of the world's main financial centers, Business Bay, Dubai's prime business hub, and flanked by the most iconic projects including the highest tower in the world Burj Khalifa, and the largest shopping mall in the world Dubai Mall, the Mall contains more than 1,200 shops with an area of 3.77 million Sqft.",
     features: [
@@ -157,11 +157,11 @@ export const properties: Property[] = [
     location: "Business Bay, Dubai",
     imageSrc: "/images/rental/canalbay/canalbay-1.jpeg",
     imageAlt: "Sobha Waves",
-    beds: 3,
-    baths: 2.5,
+    beds: 1,
+    baths: 2,
     area: "1,265.9",
     availableFor: ['rent'],
-    rentPrice: "AED 1,200,000",
+    rentPrice: "80,000 - 95,000",
     shortStayPrice: "AED 3,333/night",
     description: "Located in Business Bay, this brand new - ready for occupancy apartment building features state-of-the-art amenities and well-polished and elegantly crafted interior designs. Offering 2 and 3-bedroom apartments, Canal Bay offers a modern and luxurious living space for you and your loved ones.",
     features: [
