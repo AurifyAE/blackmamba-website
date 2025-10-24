@@ -16,7 +16,7 @@ export interface Property {
   floorPlan?: string
   companyName: string
   companyLogo: string
-  features?: string[]
+  features: string[]
   // Additional fields from rentals
   unit?: string
   balconyQty?: number
