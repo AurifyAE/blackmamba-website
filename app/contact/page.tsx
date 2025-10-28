@@ -1,6 +1,7 @@
 import React from 'react'
 import ContactForm from '../components/ContactForm'
 import Navbar from '../components/Navbar'
+import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from '../components/Footer'
 import Image from 'next/image'
 
@@ -8,7 +9,16 @@ const page = () => {
   return (
     <main>
         <Navbar />
-      
+      <section className="relative w-full">
+        <div className="absolute top-0 left-0 w-full z-50">
+          <div className="px-4 sm:px-5 md:px-15">
+            <div className="max-w-7xl mx-auto pt-20">
+              <Breadcrumbs />
+            </div>
+          </div>
+        </div>
+      </section>
+
         {/* Hero Section with Background Image and Right Aligned Text */}
         <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
             <Image

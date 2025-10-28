@@ -167,13 +167,18 @@ export default function ProductList({ products = propertyProducts }: ProductList
   return (
     <div className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
       <div className="max-w-6xl mx-auto">
+        <div className="mb-16 text-center">
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Gateway to Effortless Luxury Living</h1>
+          <p className="text-base text-gray-600 leading-relaxed">Lease a distinguished residence on annual terms with monthly convenience starting from AED 4,000</p>
+        </div>
+
         {/* Filters and Sorting */}
         <div className="mb-8">
           {/* Desktop Layout */}
           <div className="hidden md:flex justify-between items-start gap-6 mb-6">
             {/* Left side - Filters */}
-            <div className="flex items-center gap-3">
-              <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Filter by</label>
+            <div className="flex items-start gap-3">
+              <label className="text-sm font-medium text-gray-700 whitespace-nowrap pt-2">Filter by</label>
               <div className="flex flex-wrap gap-4">
               {/* Property Type Filter */}
               <div className="flex flex-col">
@@ -291,8 +296,8 @@ export default function ProductList({ products = propertyProducts }: ProductList
             </div>
 
             {/* Right side - Sorting */}
-            <div className="flex items-center gap-3">
-              <label className="text-sm font-medium text-gray-700 whitespace-nowrap">Sort By</label>
+            <div className="flex items-start gap-3">
+              <label className="text-sm font-medium text-gray-700 whitespace-nowrap pt-2">Sort By</label>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}

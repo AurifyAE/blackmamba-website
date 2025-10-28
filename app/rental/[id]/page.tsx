@@ -4,8 +4,8 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import Navbar from '../../components/Navbar'
+import Breadcrumbs from '../../components/Breadcrumbs'
 import Footer from '../../components/Footer'
-import Amenities from '@/app/components/Amenities'
 import PropertyMap from '@/app/components/PropertyMap'
 import { properties, Property } from '../../../data/properties'
 
@@ -25,6 +25,11 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
       <Navbar />
       
       <main className="pt-16">
+        <section className="px-4 sm:px-5 md:px-15">
+          <div className="max-w-7xl mx-auto pt-4">
+            <Breadcrumbs />
+          </div>
+        </section>
         {/* Building Name */}
         <section className="px-6 sm:px-8 md:px-20 pt-20 bg-gray-50">
           <div className="max-w-7xl mx-auto">
@@ -147,12 +152,42 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
                       <p className="text-gray-800 text-lg font-medium">
                         {property.comingSoon ? 'Luxury Villa Coming Soon' : 'Fully Furnished, Ready To Move Apartment'}
                       </p>
-                      <Link
-                        href="/contact"
-                        className="inline-block mt-4 bg-[#A97C50] text-white px-6 py-3 hover:bg-[#8B6B42] focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:ring-offset-2 transition-colors"
-                      >
-                        {property.comingSoon ? 'Get Notified When Available' : 'Secure Your Spot Now'}
-                      </Link>
+                      <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+                        <Link
+                          href="/contact"
+                          className="inline-block bg-[#A97C50] text-white px-6 py-3 hover:bg-[#8B6B42] focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:ring-offset-2 transition-colors text-center"
+                        >
+                          {property.comingSoon ? 'Get Notified When Available' : 'Secure Your Spot Now'}
+                        </Link>
+                        <div className="flex items-center gap-1 sm:gap-2 bg-black/70 rounded-full px-2 py-2">
+                          <a
+                            href="/contact"
+                            className="inline-flex items-center text-white px-3 py-2 rounded-md hover:bg-neutral-600 transition-colors"
+                            aria-label="Enquiry"
+                            title="Enquiry"
+                          >
+                            <Image src="/images/enquiry.svg" alt="Enquiry" width={25} height={25} />
+                          </a>
+                          <a
+                            href="tel:+971501100678"
+                            className="inline-flex items-center text-white px-3 py-2 rounded-md hover:bg-neutral-600 transition-colors"
+                            aria-label="Call"
+                            title="Call"
+                          >
+                            <Image src="/images/phone.svg" alt="Call" width={25} height={25} />
+                          </a>
+                          <a
+                            href="https://wa.me/971501100678"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center text-white px-3 py-2 rounded-md hover:bg-neutral-600 transition-colors"
+                            aria-label="WhatsApp"
+                            title="WhatsApp"
+                          >
+                            <Image src="/images/whatsapp.svg" alt="WhatsApp" width={25} height={25} />
+                          </a>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -160,7 +195,7 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
 
               {/* Right side - Floor Plan */}
               <div>
-                <div className="relative aspect-[5/4] overflow-hidden shadow-lg">
+                <div className="relative aspect-[5/4] overflow-hidden">
                   {property.floorPlan ? (
                     <Image
                       src={property.floorPlan}
@@ -184,7 +219,6 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
           </div>
         </section>
 
-        <Amenities />
 
         {/* Company Information */}
         <section className="px-4 sm:px-5 md:px-15 py-8">
@@ -193,7 +227,7 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
               {/* Left side - Company Logo and Details */}
               <div className="space-y-6">
                 <div className="flex justify-center lg:justify-start">
-                  <div className="relative w-72 h-52">
+                  <div className="relative w-80 h-28">
                     <Image
                       src={property.companyLogo}
                       alt={`${property.companyName} Logo`}
@@ -203,15 +237,21 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
                   </div>
                 </div>
                 <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">{property.descriptionTitle}</h3>
                   <p className="text-gray-600 leading-relaxed">
                     {property.description}
                   </p>
+                {property.description2 && (
+                  <p className="text-gray-600 leading-relaxed mt-4">
+                    {property.description2}
+                  </p>
+                )}
                 </div>
               </div>
 
               {/* Right side - Property Features */}
               <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">Property Features</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-6">Key Highlights</h3>
               <div className="space-y-0">
                 {property.features?.map((feature, index) => (
                   <div key={index} className="py-3 border-b border-gray-200 last:border-b-0">
@@ -249,6 +289,23 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
       </main>
 
       <PropertyMap property={property} />
+      {property.description3 && (
+        <section className="max-w-7xl mx-auto py-8 px-4">
+          <div className="bg-white p-6">
+            {Array.isArray(property.description3) ? (
+              <ul className="text-gray-600 leading-relaxed list-disc pl-6 space-y-3">
+                {property.description3.map((point: string, idx: number) => (
+                  <li key={idx}>{point}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="text-gray-600 leading-relaxed whitespace-pre-line">
+                {property.description3}
+              </p>
+            )}
+          </div>
+        </section>
+      )}
       <Footer />
     </div>
   )

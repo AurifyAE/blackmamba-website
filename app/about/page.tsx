@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "../components/Navbar";
+import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 
 export default function About() {
@@ -10,7 +11,7 @@ export default function About() {
       title: ""
     },
     {
-      src: "/images/about/bento2.jpg", 
+      src: "/images/rental/downtown-img/downtown-15.jpeg",
       alt: "Dubai Marina",
       title: ""
     },
@@ -35,7 +36,7 @@ export default function About() {
       title: ""
     },
     {
-      src: "/images/about/bento7.jpg",
+      src: "/images/rental/downtown-img/downtown-2.jpeg",
       alt: "Dubai Creek",
       title: ""
     },
@@ -87,6 +88,14 @@ export default function About() {
           className="object-cover"
         />
         <div className="absolute inset-0 bg-black/50" />
+        {/* Breadcrumbs over hero with high z-index */}
+        <div className="absolute top-0 left-0 w-full z-50">
+          <div className="px-4 sm:px-5 md:px-15">
+            <div className="max-w-7xl mx-auto pt-20">
+              <Breadcrumbs />
+            </div>
+          </div>
+        </div>
         <div className="absolute inset-0 flex items-center justify-end">
           <div className="w-full max-w-lg text-white text-center mr-4 sm:mr-5 md:mr-[60px]">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6 leading-tight">

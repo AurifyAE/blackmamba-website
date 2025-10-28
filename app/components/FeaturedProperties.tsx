@@ -9,13 +9,13 @@ const featuredProperties = [
     },
     { 
       src: "/images/dubai-marina.png", 
-      alt: "Dubai Marina", 
-      title: "Dubai Marina" 
+      alt: "Business Bay", 
+      title: "Business Bay" 
     },
     { 
       src: "/images/jumeirah-lake.jpg", 
-      alt: "Jumeirah Lake Tower", 
-      title: "Jumeirah Lake Tower" 
+      alt: "Nad Al Sheba", 
+      title: "Nad Al Sheba" 
     },
     { 
       src: "/images/palm-jumeirah.jpg", 

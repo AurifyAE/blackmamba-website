@@ -12,7 +12,11 @@ export default function ContactForm() {
     lastName: "",
     email: "",
     unitType: "",
+    location: "",
     contactMode: "",
+    serviceBuying: false,
+    serviceRenting: false,
+    serviceShortStay: false,
     privacyPolicy: false,
     newsletter: false
   });
@@ -28,6 +32,21 @@ export default function ContactForm() {
         ? target.checked
         : target.value;
 
+    // Ensure only one of the "Interested In" checkboxes is selected at a time
+    if (
+      fieldName === 'serviceBuying' ||
+      fieldName === 'serviceRenting' ||
+      fieldName === 'serviceShortStay'
+    ) {
+      setFormData(prev => ({
+        ...prev,
+        serviceBuying: fieldName === 'serviceBuying' ? Boolean(valueToSet) : false,
+        serviceRenting: fieldName === 'serviceRenting' ? Boolean(valueToSet) : false,
+        serviceShortStay: fieldName === 'serviceShortStay' ? Boolean(valueToSet) : false,
+      }))
+      return
+    }
+
     setFormData(prev => ({
       ...prev,
       [fieldName]: valueToSet
@@ -39,6 +58,12 @@ export default function ContactForm() {
     
     // Prepare the email content
     const emailSubject = encodeURIComponent("Property Inquiry - Black Mamba");
+    const selectedServices = [
+      formData.serviceBuying ? 'Buying' : null,
+      formData.serviceRenting ? 'Renting' : null,
+      formData.serviceShortStay ? 'Short Stay' : null,
+    ].filter(Boolean).join(', ');
+
     const emailBody = encodeURIComponent(`
 Hello,
 
@@ -48,11 +73,9 @@ Name: ${formData.firstName} ${formData.lastName}
 Email: ${formData.email}
 Phone: ${phone}
 Unit Type: ${formData.unitType}
+Preferred Location: ${formData.location}
+Interested In: ${selectedServices || 'N/A'}
 Preferred Contact Mode: ${formData.contactMode}
-
-Additional Information:
-- Privacy Policy Accepted: ${formData.privacyPolicy ? 'Yes' : 'No'}
-- Newsletter Subscription: ${formData.newsletter ? 'Yes' : 'No'}
 
 Please contact me at your earliest convenience.
 
@@ -65,9 +88,23 @@ ${formData.firstName} ${formData.lastName}
     
     // Open Gmail in a new tab
     window.open(gmailUrl, '_blank');
-    
-    // Optional: Show success message
-    alert('Redirecting to Gmail to send your inquiry...');
+
+    // Reset form fields after submit
+    setPhone("+971");
+    setFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      unitType: "",
+      location: "",
+      contactMode: "",
+      serviceBuying: false,
+      serviceRenting: false,
+      serviceShortStay: false,
+      privacyPolicy: false,
+      newsletter: false,
+    });
+
   };
 
   return (
@@ -77,8 +114,8 @@ ${formData.firstName} ${formData.lastName}
           {/* Left Side - Black Background with Centered Text */}
           <div className="flex-1 bg-black flex items-center justify-center px-6 sm:px-8 py-8 lg:py-0">
             <div className="text-center">
-              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-semibold leading-tight">
-                WE'D LOVE TO<br />Secure Your Spot Now
+              <h2 className="text-white text-2xl sm:text-3xl lg:text-5xl font-semibold leading-tight">
+                <span className="text-xl font-light">WE'D LOVE TO</span><br />Secure Your <br />Spot Now
               </h2>
             </div>
           </div>
@@ -86,6 +123,44 @@ ${formData.firstName} ${formData.lastName}
           {/* Right Side - Form */}
           <div className="flex-1 bg-white p-6 sm:p-8 lg:p-12">
             <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4 sm:space-y-6">
+              {/* Interested In */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-3">
+                  Interested In
+                </label>
+                <div className="flex flex-wrap gap-4 sm:gap-6">
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="serviceBuying"
+                      checked={formData.serviceBuying}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-[#A97C50] focus:ring-[#A97C50] border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">Buying</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="serviceRenting"
+                      checked={formData.serviceRenting}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-[#A97C50] focus:ring-[#A97C50] border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">Renting</span>
+                  </label>
+                  <label className="flex items-center">
+                    <input
+                      type="checkbox"
+                      name="serviceShortStay"
+                      checked={formData.serviceShortStay}
+                      onChange={handleInputChange}
+                      className="h-4 w-4 text-[#A97C50] focus:ring-[#A97C50] border-gray-300"
+                    />
+                    <span className="ml-2 text-sm text-gray-700">Short Stay</span>
+                  </label>
+                </div>
+              </div>
               {/* Name Fields */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
                 <div>
@@ -197,8 +272,27 @@ ${formData.firstName} ${formData.lastName}
                   <option value="1-bedroom">1 Bedroom</option>
                   <option value="2-bedroom">2 Bedroom</option>
                   <option value="3-bedroom">3 Bedroom</option>
-                  <option value="studio">Studio</option>
-                  <option value="penthouse">Penthouse</option>
+                  <option value="community">Community</option>
+                </select>
+              </div>
+
+              {/* Preferred Location */}
+              <div>
+                <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-2">
+                  Preferred Location
+                </label>
+                <select
+                  id="location"
+                  name="location"
+                  value={formData.location}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                >
+                  <option value="">Select Location</option>
+                  <option value="Downtown">Downtown</option>
+                  <option value="Business Bay">Business Bay</option>
+                  <option value="Nad Al Sheba">Nad Al Sheba</option>
+                  <option value="Dubai Marina">Dubai Marina</option>
                 </select>
               </div>
 

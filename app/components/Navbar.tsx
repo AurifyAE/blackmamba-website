@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isOverHero, setIsOverHero] = useState(true)
+  const [hoveredButton, setHoveredButton] = useState<string | null>(null)
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -35,7 +36,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className={`fixed top-0 left-0 w-full z-50 flex justify-between items-center py-3 px-4 md:px-15 lg:px-30 font-normal transition-colors duration-500 ${
+      <div className={`fixed top-0 left-0 w-full z-100 flex justify-between items-center py-3 px-4 md:px-15 font-normal transition-colors duration-500 ${
         isOverHero ? 'bg-transparent text-white' : 'bg-black text-white'
       }`}>
         <Link href="/" onClick={closeMenu}>
@@ -48,13 +49,35 @@ export default function Navbar() {
           />
         </Link>
 
-        <div className='lg:flex justify-between items-center gap-2 hidden'>
-          <span className='cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm'>Buy</span>
+        <div className='lg:flex justify-between items-center gap-2 hidden relative'>
+          <span 
+            className='cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm relative'
+            onMouseEnter={() => setHoveredButton('buy')}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            Buy
+            {hoveredButton === 'buy' && (
+              <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
+                Coming Soon
+              </span>
+            )}
+          </span>
           <Link href="/rental"  className='cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm'>Rent</Link>
-          <span className='cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm'>Short Stays</span>
+          <span 
+            className='cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm relative'
+            onMouseEnter={() => setHoveredButton('short-stays')}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            Short Stays
+            {hoveredButton === 'short-stays' && (
+              <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
+                Coming Soon
+              </span>
+            )}
+          </span>
           <Link href="/about" className="cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm">About Us</Link>
           <Link href="/contact" className="cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm">Contact</Link>
-          <Link href="/login" className="ml-4 cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm">Register/ Sign in</Link>
+          <Link href="/login" className="ml-4 cursor-pointer hover:bg-white/20 transition-colors duration-300 px-4 py-1 rounded-sm">Sign in</Link>
         </div>
 
         {/* Hamburger icon */}
@@ -96,11 +119,33 @@ export default function Navbar() {
           </button>
         </div>
         <div className='flex flex-col items-start px-6 py-6 gap-6'>
-          <span className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors'>Buy</span>
-          <span className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors'>Rent</span>
-          <span className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors'>Short Stays</span>
+          <span 
+            className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors relative'
+            onMouseEnter={() => setHoveredButton('buy-mobile')}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            Buy
+            {hoveredButton === 'buy-mobile' && (
+              <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
+                Coming Soon
+              </span>
+            )}
+          </span>
+          <Link href="/rental" className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors' onClick={closeMenu}>Rent</Link>
+          <span 
+            className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors relative'
+            onMouseEnter={() => setHoveredButton('short-stays-mobile')}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            Short Stays
+            {hoveredButton === 'short-stays-mobile' && (
+              <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
+                Coming Soon
+              </span>
+            )}
+          </span>
           <Link 
-            href="/account" 
+            href="/about" 
             className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors'
             onClick={closeMenu}
           >

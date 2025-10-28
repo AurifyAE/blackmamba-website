@@ -15,23 +15,26 @@ export default function Home() {
   
   const carouselImages = [
     {
-      src: '/images/carousel1.png',
+      src: "/images/rental/canalbay/canalbay-7.jpeg",
       alt: 'Beautiful landscape',
-      title: 'Mountain Vista',
-      description: 'Breathtaking mountain views at sunset'
     },
     {
-      src: '/images/carousel2.jpg',
+      src: "/images/rental/downtown-img/downtown-15.jpeg",
       alt: 'City skyline',
-      title: 'Urban Skyline',
-      description: 'Modern city architecture'
     },
     {
-      src: '/images/carousel3.png',
+      src: "/images/rental/sobha-wave/sobha-wave-9.jpeg",
       alt: 'Ocean waves',
-      title: 'Ocean Waves',
-      description: 'Peaceful coastal scenery'
-    }
+    },
+    {
+      src: "/images/rental/downtown-img/downtown-4.jpeg",
+      alt: 'Ocean waves',
+    },
+    {
+      src: "/images/rental/downtown-img/downtown-5.jpeg",
+      alt: 'Ocean waves',
+    },
+    
   ]
 
   return (
@@ -47,8 +50,8 @@ export default function Home() {
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-          <h1 className="text-white text-4xl md:text-6xl font-semibold tracking-tight">Elevate Your Lifestyle</h1>
-          <p className="mt-4 text-white/90 text-base md:text-lg">Discover exclusive homes, flexible rentals, and luxury stays all under one iconic brand</p>
+          <h1 className="text-white text-5xl md:text-7xl font-semibold tracking-tight">Elevate Your Lifestyle</h1>
+          <p className="mt-4 text-white/90 text-base">Discover exclusive homes, flexible rentals, and luxury stays all under one iconic brand</p>
           
           {/* Search Bar Component */}
           <div className="mt-6">
@@ -57,7 +60,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
+      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12 sm:pt-24">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-black">A Short Glimpse through the Properties</h2>
           <p className="mt-3 text-black/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">1, 2 & 3 Bedroom Luxurious and Modern Interiors Apartments with Stunning Views to buy, rent or for short stay In Dubai</p>
@@ -84,7 +87,7 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-10 md:px-15 py-6 sm:py-8 overflow-hidden">
+      <div className="max-w-7xl mx-auto px-4 sm:px-10 md:px-15 py-8 sm:py-12 overflow-hidden">
         <HomeCarousel 
           images={carouselImages}
           peekAmount={35}
@@ -92,7 +95,7 @@ export default function Home() {
         />
       </div>
 
-      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
+      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
 
           {/* Product Cards Demo */}
@@ -130,7 +133,7 @@ export default function Home() {
 
       <Amenities />
 
-      <section className="px-4 sm:px-5 md:px-15 py-12 sm:py-16">
+      <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
         <div className="max-w-7xl mx-auto">
           <FeaturedProperties />
         </div>

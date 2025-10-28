@@ -90,7 +90,7 @@ export default function ProductCard({
       
       <div className="absolute inset-x-2 sm:inset-x-3 bottom-2 sm:bottom-3 flex items-end justify-between gap-2 sm:gap-3">
         <div className="text-white flex-1 min-w-0">
-          <div className="text-base sm:text-lg font-bold leading-tight">{price}</div>
+          <div className="text-xs sm:text-base font-bold leading-tight">{price}</div>
           <div className="text-xs sm:text-sm leading-tight opacity-95 truncate">{title}</div>
           <div className="text-xs sm:text-sm leading-tight opacity-80 truncate">{location}</div>
         </div>

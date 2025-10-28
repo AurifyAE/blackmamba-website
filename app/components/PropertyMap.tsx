@@ -1,22 +1,20 @@
 "use client"
+import { properties, Property } from '../../data/properties'
 
 type PropertyMapProps = {
   title?: string
-  property?: {
-    embedUrl?: string
-    nearbyLocations?: Array<{ location: string; time: string }>
-  }
+  property?: Pick<Property, 'id' | 'title' | 'embedUrl' | 'nearbyLocations'>
 }
 
 export default function PropertyMap({
-  title = "Elite Living Aminities",
+  title = "",
   property
 }: PropertyMapProps) {
   const walkingDistances = property?.nearbyLocations || [
-    { location: "Dubai Mall & Burj Khalifa", time: "5 mins Walk" },
-    { location: "Dubai Fountain", time: "3 mins Walk" },
-    { location: "Dubai Aquarium", time: "4 mins Walk" },
-    { location: "Dubai Opera", time: "6 mins Walk" }
+    { location: "Dubai Mall & Burj Khalifa", time: "" },
+    { location: "Dubai Fountain", time: "" },
+    { location: "Dubai Aquarium", time: "" },
+    { location: "Dubai Opera", time: "" }
   ]
 
   return (
@@ -33,18 +31,25 @@ export default function PropertyMap({
               Nearby Locations
             </h3>
             <div className="space-y-3">
-              {walkingDistances.map((item, index) => (
-                <div key={index} className="bg-white border border-gray-200 rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <div className="flex items-center space-x-3">
-                    <div className="flex-shrink-0">
-                      <div className="w-3 h-3 bg-[#A97C50] rounded-full"></div>
-                    </div>
-                    <div className="flex-1">
-                      <p className="text-gray-900 font-medium">{item.time} to {item.location}</p>
+              {walkingDistances.map((item, index) => {
+                // For "downtown" property, first index: no bullet dot
+                const isDowntown =
+                  property?.id === 'dunya-tower' ||
+                  (property?.title && property.title.toLowerCase().includes('downtown'));
+                const hideDot = isDowntown && index === 0;
+                return (
+                  <div key={index} className="bg-white p-4 hover:shadow-md transition-shadow">
+                    <div className="flex items-center space-x-3">
+                      <div className="flex-shrink-0">
+                        {!hideDot && <div className="w-3 h-3 bg-[#A97C50] rounded-full"></div>}
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-gray-900 font-medium">{item.location}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
