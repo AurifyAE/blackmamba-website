@@ -159,7 +159,17 @@ export default function Footer() {
               </p>
             </div>
             <div className="text-center">
-              <p className="text-gray-500 text-[11px] sm:text-xs">Made by 3RCreative</p>
+              <p className="text-gray-500 text-[11px] sm:text-xs">
+                Made by{" "}
+                <a
+                  href="https://creative3r.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline hover:text-gray-400 transition-colors"
+                >
+                  3RCreative
+                </a>
+              </p>
             </div>
           </div>
         </div>

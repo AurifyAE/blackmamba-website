@@ -92,7 +92,7 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
             onClick={handleSearch}
             className="h-12 px-4 bg-[#A97C50] text-white border-4 border-white hover:bg-black transition-all duration-500 font-medium text-sm sm:text-base"
           >
-            <Image src="/images/search-icon.svg" alt="" width={20} height={20} />
+            <Image src="/images/search-icon.svg" className='' alt="" width={20} height={20} />
           </button>
         </div>
       </div>
