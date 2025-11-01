@@ -239,12 +239,12 @@ export default function Navbar() {
       )}
 
       {/* Mobile Slide Menu */}
-      <div className={`fixed top-0 right-0 h-full w-3/4 max-w-xs bg-white text-black z-[9996] transform transition-transform duration-300 ease-in-out lg:hidden ${
+      <div className={`fixed top-0 right-0 h-full w-3/4 max-w-xs bg-white text-black z-[9999] transform transition-transform duration-300 ease-in-out lg:hidden ${
         isMenuOpen ? 'translate-x-0' : 'translate-x-full'
       }`}>
         <div className='flex justify-between items-center p-4 border-b'>
           <Image 
-            src="/images/logo.svg" 
+            src="/images/logo.svg"
             alt="Logo" 
             width={120} 
             height={30}

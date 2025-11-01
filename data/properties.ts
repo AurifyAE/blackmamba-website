@@ -1,5 +1,6 @@
 export interface Property {
   id: string
+  cardTitle: string
   title: string
   location: string
   imageSrc: string
@@ -35,9 +36,10 @@ export interface Property {
 export const properties: Property[] = [
   {
     id: "canal-bay",
+    cardTitle: "Canal Bay",
     title: "Waterfront Sophistication 3 Bedroom premium Apartment | Fully Furnished",
     location: "Business Bay, Dubai",
-    imageSrc: "/images/rental/canalbay/canalbay-7.jpeg",
+    imageSrc: "/images/rental/sobha-wave/sobha-wave-9.jpeg",
     imageAlt: "Canal Bay by Ned",
     beds: 3,
     baths: 2.5,
@@ -62,11 +64,13 @@ Blackmamba Real Estate L.L.C.`,
       "Dedicated parking and 24/7 security services"
     ],
     galleryImages: [
+      "/images/rental/sobha-wave/sobha-wave-9.jpeg",
       "/images/rental/canalbay/canalbay-7.jpeg",
+      "/images/rental/sobha-wave/sobha-wave-14.jpeg",
+      "/images/rental/sobha-wave/sobha-wave-24.jpeg",
       "/images/rental/canalbay/canalbay-1.jpeg",
       "/images/rental/canalbay/canalbay-2.jpeg",
       "/images/rental/canalbay/canalbay-3.jpeg",
-      "/images/rental/canalbay/canalbay-4.jpeg",
       "/images/rental/canalbay/canalbay-5.jpeg",
       "/images/rental/canalbay/canalbay-6.jpeg",
       "/images/rental/canalbay/canalbay-8.jpeg",
@@ -104,6 +108,7 @@ Blackmamba Real Estate L.L.C.`,
   },
   {
     id: "dunya-tower",
+    cardTitle: "Dunya Tower",
     title: "Elegant Downtown | 3 bedrooms Apartment | Fully Furnished | Dual Balcony",
     location: "Downtown Dubai",
     imageSrc: "/images/rental/downtown-img/downtown-15.jpeg",
@@ -170,9 +175,10 @@ Blackmamba Real Estate L.L.C.`,
   },
   {
     id: "sobha-waves",
+    cardTitle: "Sobha Hartland - Waves",
     title: "Sobha Hartland - Waves",
     location: "Nad Al Sheba, Dubai",
-    imageSrc: "/images/rental/sobha-wave/sobha-wave-3.jpeg",
+    imageSrc: "/images/rental/sobha-wave/sobha-wave-13.jpeg",
     imageAlt: "Sobha Waves",
     beds: 1,
     baths: 1,
@@ -193,28 +199,26 @@ Blackmamba Real Estate L.L.C.`,
       "Private balcony in every apartment, designed to maximize views"
     ],
     galleryImages: [
-      "/images/rental/sobha-wave/sobha-wave-3.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-9.jpeg",
+      "/images/rental/sobha-wave/sobha-wave-13.jpeg",
       "/images/rental/sobha-wave/sobha-wave-8.jpeg",
       "/images/rental/sobha-wave/sobha-wave-12.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-13.jpeg",
+      "/images/rental/sobha-wave/sobha-wave-3.jpeg",
       "/images/rental/sobha-wave/sobha-wave-4.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-14.jpeg",
       "/images/rental/sobha-wave/sobha-wave-1.jpeg",
       "/images/rental/sobha-wave/sobha-wave-5.jpeg",
       "/images/rental/sobha-wave/sobha-wave-6.jpeg",
       "/images/rental/sobha-wave/sobha-wave-7.jpeg",
       "/images/rental/sobha-wave/sobha-wave-10.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-11.jpeg",
       "/images/rental/sobha-wave/sobha-wave-15.jpeg",
+      "/images/rental/canalbay/canalbay-4.jpeg",
+      "/images/rental/sobha-wave/sobha-wave-11.jpeg",
       "/images/rental/sobha-wave/sobha-wave-16.jpeg",
       "/images/rental/sobha-wave/sobha-wave-17.jpeg",
       "/images/rental/sobha-wave/sobha-wave-19.jpeg",
       "/images/rental/sobha-wave/sobha-wave-20.jpeg",
       "/images/rental/sobha-wave/sobha-wave-21.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-22.jpeg",
       "/images/rental/sobha-wave/sobha-wave-23.jpeg",
-      "/images/rental/sobha-wave/sobha-wave-24.jpeg"
+      
     ],
     floorPlan: "/images/rental/sobha-wave/sobha-hartland-waves.jpg",
     companyName: "Sobha Hartland - Waves",
@@ -235,6 +239,7 @@ Blackmamba Real Estate L.L.C.`,
   },
   {
     id: "azizi-developments",
+    cardTitle: "Azizi Developments",
     title: "Azizi Developments",
     location: "Dubai Marina",
     imageSrc: "/images/product-azizi-developments-dubai.png",

@@ -10,6 +10,7 @@ interface Product {
   imageSrc: string
   imageAlt: string
   price: string
+  cardTitle: string
   title: string
   location: string
   beds: number
@@ -61,6 +62,7 @@ const propertyProducts: Product[] = properties.map((property: Property) => {
     imageSrc: property.imageSrc,
     imageAlt: property.imageAlt,
     price: price,
+    cardTitle: property.cardTitle,
     title: property.title,
     location: property.location,
     beds: beds,
@@ -83,7 +85,7 @@ export default function ProductList({ products = propertyProducts }: ProductList
     customMaxPrice: ''
   })
   
-  const [sortBy, setSortBy] = useState('price-low')
+  const [sortBy, setSortBy] = useState('newest')
   const [showMobileFilters, setShowMobileFilters] = useState(false)
 
   // Check if any filter is selected
@@ -101,11 +103,11 @@ export default function ProductList({ products = propertyProducts }: ProductList
     { label: 'Custom Range', min: 0, max: 0 } // Special case for custom input
   ]
   const sortOptions = [
+    { value: 'newest', label: 'Newest First' },
     { value: 'price-low', label: 'Price: Low to High' },
     { value: 'price-high', label: 'Price: High to Low' },
     { value: 'area-low', label: 'Area: Small to Large' },
     { value: 'area-high', label: 'Area: Large to Small' },
-    { value: 'newest', label: 'Newest First' }
   ]
 
   const handleFilterChange = (key: string, value: string) => {
@@ -168,8 +170,8 @@ export default function ProductList({ products = propertyProducts }: ProductList
     <div className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
       <div className="max-w-6xl mx-auto">
         <div className="mb-16 text-center">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Gateway to Effortless Luxury Living</h1>
-          <p className="text-base text-gray-600 leading-relaxed">Lease a distinguished residence on annual terms with monthly convenience starting from AED 4,000</p>
+          <h1 className="text-2xl md:text-4xl font-bold text-gray-900 mb-4">Your Gateway to Effortless Luxury Living</h1>
+          <p className="text-sm text-gray-600 leading-relaxed">Lease a distinguished residence on annual terms with monthly convenience starting from AED 4,000</p>
         </div>
 
         {/* Filters and Sorting */}
@@ -503,7 +505,7 @@ export default function ProductList({ products = propertyProducts }: ProductList
                 <div className="absolute bg-black/50 p-6 inset-x-2 sm:inset-x-3 bottom-2 sm:bottom-3 flex items-end justify-between gap-2 sm:gap-3">
                   <div className="text-white flex-1 min-w-0">
                     <div className="text-base sm:text-lg font-bold leading-tight">{product.price}</div>
-                    <div className="text-xs sm:text-sm leading-tight opacity-95 truncate">{product.title}</div>
+                    <div className="text-xs sm:text-sm leading-tight opacity-95 truncate">{product.cardTitle}</div>
                     <div className="text-xs sm:text-sm leading-tight opacity-80 truncate">{product.location}</div>
                   </div>
                   <div className="shrink-0 text-xs sm:text-sm text-white/90">

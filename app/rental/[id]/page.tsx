@@ -1,5 +1,5 @@
 'use client'
-import { use, useState } from 'react'
+import { use, useState, useEffect } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
@@ -8,10 +8,27 @@ import Breadcrumbs from '../../components/Breadcrumbs'
 import Footer from '../../components/Footer'
 import PropertyMap from '@/app/components/PropertyMap'
 import { properties, Property } from '../../../data/properties'
+import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch'
 
 export default function RentalDetails({ params }: { params: Promise<{ id: string }> }) {
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
+  const [isFloorPlanZoomed, setIsFloorPlanZoomed] = useState(false)
   const { id } = use(params);
+  
+  // Escape key to close modal
+  useEffect(() => {
+    if (!isFloorPlanZoomed) return;
+    
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        e.preventDefault();
+        setIsFloorPlanZoomed(false);
+      }
+    };
+    
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isFloorPlanZoomed]);
   // Find property by ID from the properties data
   const property = properties.find((prop) => prop.id === id)
   
@@ -49,10 +66,10 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
         {/* Project Gallery */}
         <section className="px-4 sm:px-5 md:px-15 pt-4 pb-8">
           <div className="max-w-7xl mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 min-h-[700px]">
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:min-h-[700px]">
               {/* Left side - Main Image */}
               <div className="lg:col-span-3">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-3xl">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-3xl w-full">
                   {property.comingSoon ? (
                     <div className="w-full h-full absolute inset-0 flex items-center justify-center bg-[#A97C50] opacity-50 rounded-3xl">
                       <span className="text-3xl font-bold text-white drop-shadow-md px-6 py-3 rounded-xl">
@@ -70,14 +87,14 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
                 </div>
               </div>
 
-              {/* Right side - Thumbnail Gallery */}
-                <div className="lg:col-span-1">
-                  <div className="space-y-3 max-h-[700px] overflow-y-auto ov  erflow-x-hidden [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500">
+              {/* Right side - Thumbnail Gallery (Desktop) */}
+              <div className="hidden lg:block lg:col-span-1">
+                <div className="space-y-3 max-h-[700px] overflow-y-auto overflow-x-hidden [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-track]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-gray-300 dark:[&::-webkit-scrollbar-track]:bg-neutral-700 dark:[&::-webkit-scrollbar-thumb]:bg-neutral-500 pr-5">
                   {property.galleryImages.map((image, index) => (
                     <div
                       key={index}
                       onClick={() => setSelectedImageIndex(index)}
-                      className={`relative aspect-[4/3] overflow-hidden rounded-3xl cursor-pointer mr-4`}
+                      className={`relative aspect-[4/3] overflow-hidden rounded-3xl cursor-pointer`}
                     >
                       {property.comingSoon ? (
                         <div className="flex items-center justify-center absolute inset-0 rounded-3xl bg-gradient-to-br from-[#A97C50] to-[#F6E4CA]">
@@ -103,15 +120,41 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
                     </div>
                   ))}
                 </div>
-                
-                {/* Show More Images Indicator */}
-                {property.galleryImages.length > 4 && (
-                  <div className="mt-3 text-center">
-                    <p className="text-sm text-gray-600">
-                      +{property.galleryImages.length - 4} more images
-                    </p>
-                  </div>
-                )}
+              </div>
+
+              {/* Mobile - Horizontal Scrolling Thumbnail Gallery */}
+              <div className="lg:hidden mt-4">
+                <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4 scrollbar-hide [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  {property.galleryImages.map((image, index) => (
+                    <div
+                      key={index}
+                      onClick={() => setSelectedImageIndex(index)}
+                      className={`relative aspect-[4/3] overflow-hidden rounded-2xl cursor-pointer flex-shrink-0 w-[calc(33.333%-0.5rem)]`}
+                    >
+                      {property.comingSoon ? (
+                        <div className="flex items-center justify-center absolute inset-0 rounded-2xl bg-gradient-to-br from-[#A97C50] to-[#F6E4CA]">
+                          <span className="text-white text-sm font-semibold drop-shadow text-center px-2">
+                            {property.title}
+                          </span>
+                        </div>
+                      ) : (
+                        <Image
+                          src={image}
+                          alt={`${property.title} - Thumbnail ${index + 1}`}
+                          fill
+                          className={`object-cover transition-all duration-300 ${
+                            selectedImageIndex === index 
+                              ? 'ring-2 ring-[#A97C50] ring-offset-2' 
+                              : 'opacity-70 hover:opacity-100'
+                          }`}
+                        />
+                      )}
+                      {selectedImageIndex === index && (
+                        <div className="absolute inset-0 bg-black/20 flex items-center justify-center"></div>
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -159,7 +202,7 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
                         >
                           {property.comingSoon ? 'Get Notified When Available' : 'Secure Your Spot Now'}
                         </Link>
-                        <div className="flex items-center gap-1 sm:gap-2 bg-black/70 rounded-full px-2 py-2">
+                        <div className="flex items-center justify-center gap-1 sm:gap-2 bg-black/70 rounded-full px-2 py-2">
                           <a
                             href="/contact"
                             className="inline-flex items-center text-white px-3 py-2 rounded-md hover:bg-neutral-600 transition-colors"
@@ -195,14 +238,25 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
 
               {/* Right side - Floor Plan */}
               <div>
-                <div className="relative aspect-[5/4] overflow-hidden">
+                <div className="relative aspect-[5/4] overflow-hidden group">
                   {property.floorPlan ? (
-                    <Image
-                      src={property.floorPlan}
-                      alt={`${property.title} - Floor Plan`}
-                      fill
-                      className="object-contain"
-                    />
+                    <>
+                      <Image
+                        src={property.floorPlan}
+                        alt={`${property.title} - Floor Plan`}
+                        fill
+                        className="object-contain"
+                      />
+                      <button
+                        onClick={() => setIsFloorPlanZoomed(true)}
+                        className="absolute top-4 right-4 bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100"
+                        aria-label="Zoom floor plan"
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6 text-gray-800">
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607zM10.5 7.5v6m3-3h-6" />
+                        </svg>
+                      </button>
+                    </>
                   ) : (
                     <div className="flex items-center justify-center w-full h-full bg-[#A97C50] opacity-50">
                       <span className="text-2xl font-bold text-white bg-transparent bg-opacity-80 rounded-lg px-6 py-3 shadow-md">
@@ -307,6 +361,69 @@ export default function RentalDetails({ params }: { params: Promise<{ id: string
         </section>
       )}
       <Footer />
+
+      {/* Floor Plan Zoom Modal */}
+      {isFloorPlanZoomed && property.floorPlan && (
+        <div 
+          className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center p-4"
+          onClick={() => setIsFloorPlanZoomed(false)}
+        >
+          <div 
+            className="relative w-full h-full max-w-4xl max-h-[80vh]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
+            <div className="absolute top-4 right-4 z-10">
+              <button
+                onClick={() => setIsFloorPlanZoomed(false)}
+                className="bg-white/90 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                aria-label="Close zoom"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Zoomed Floor Plan Image with react-zoom-pan-pinch */}
+            <TransformWrapper
+              initialScale={1}
+              minScale={0.5}
+              maxScale={3}
+              wheel={{
+                step: 0.1,
+              }}
+              panning={{
+                disabled: false,
+              }}
+            >
+              <TransformComponent
+                wrapperStyle={{
+                  width: '100%',
+                  height: '100%',
+                }}
+                contentStyle={{
+                  width: '100%',
+                  height: '100%',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={property.floorPlan}
+                    alt={`${property.title} - Floor Plan (Zoomed)`}
+                    width={1200}
+                    height={960}
+                    className="object-contain"
+                  />
+                </div>
+              </TransformComponent>
+            </TransformWrapper>
+          </div>
+        </div>
+      )}
     </div>
   )
 }

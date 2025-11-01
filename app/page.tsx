@@ -111,6 +111,7 @@ export default function Home() {
                 imageSrc={property.imageSrc}
                 imageAlt={property.imageAlt}
                 price={property.buyPrice || property.rentPrice || property.shortStayPrice || 'Price on request'}
+                cardTitle={property.cardTitle}
                 title={property.title}
                 location={property.location}
                 beds={property.beds}
@@ -123,10 +124,14 @@ export default function Home() {
             ))}
           </div>
           <div className="bg-black">
-              <div className="flex items-center justify-center gap-6 py-4 sm:py-6">
-              <p className="text-white">Contact us to discover whether our exclusive properties are available for purchase, rent, or short stays.</p>
-              <button className="bg-white px-6 py-2">Learn More</button>
-              </div>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6 px-6 py-4 sm:py-6">
+              <p className="text-white text-sm sm:text-base">
+                Contact us to discover whether our exclusive properties are available for purchase, rent, or short stays.
+              </p>
+              <button className="bg-white text-black px-4 sm:px-6 py-2 transition hover:bg-black w-full sm:w-42 hover:text-white border border-transparent hover:border-white text-sm sm:text-base mt-2 sm:mt-0">
+                Learn More
+              </button>
+            </div>
           </div>
         </div>
       </section>

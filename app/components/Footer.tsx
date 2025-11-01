@@ -47,7 +47,7 @@ export default function Footer() {
               </div>
               
               {/* Social Links */}
-              <div className="flex space-x-4">
+              <div className="flex space-x-4 mb-8">
                 <a
                   href="https://instagram.com"
                   target="_blank"
@@ -104,19 +104,24 @@ export default function Footer() {
             <div className="order-3 lg:order-3">
               <h3 className="text-base md:text-lg font-semibold mb-4">Explore</h3>
               <ul className="space-y-3 text-sm md:text-base">
-                <li>
-                  <Link href="/shobha-waves" className="text-gray-300 hover:text-white transition-colors">
-                    Shobha Waves
+              <li>
+                  <Link href="/rental/canal-bay" className="text-gray-300 hover:text-white transition-colors">
+                    Canal bay
                   </Link>
                 </li>
                 <li>
-                  <Link href="/dunya-properties" className="text-gray-300 hover:text-white transition-colors">
-                    Dunya Properties
+                  <Link href="/rental/shobha-waves" className="text-gray-300 hover:text-white transition-colors">
+                    Sobha Hartland - Waves
                   </Link>
                 </li>
                 <li>
-                  <Link href="/azizi-developments" className="text-gray-300 hover:text-white transition-colors">
-                    Azizi Developments
+                  <Link href="/rental/dunya-tower" className="text-gray-300 hover:text-white transition-colors">
+                    Dunya Tower
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/rental/azizi-developments" className="text-gray-300 hover:text-white transition-colors">
+                    Azizi Rivera
                   </Link>
                 </li>
               </ul>

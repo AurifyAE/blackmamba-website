@@ -8,7 +8,7 @@ type ProductCardProps = {
   imageSrc: string
   imageAlt?: string
   price: string
-  title: string
+  cardTitle: string
   location: string
   beds: number | string
   baths: number | string
@@ -24,7 +24,7 @@ export default function ProductCard({
   imageSrc, 
   imageAlt = '', 
   price, 
-  title, 
+  cardTitle, 
   location, 
   beds, 
   baths, 
@@ -91,7 +91,7 @@ export default function ProductCard({
       <div className="absolute inset-x-2 sm:inset-x-3 bottom-2 sm:bottom-3 flex items-end justify-between gap-2 sm:gap-3">
         <div className="text-white flex-1 min-w-0">
           <div className="text-xs sm:text-base font-bold leading-tight">{price}</div>
-          <div className="text-xs sm:text-sm leading-tight opacity-95 truncate">{title}</div>
+          <div className="text-xs sm:text-sm leading-tight opacity-95 truncate">{cardTitle}</div>
           <div className="text-xs sm:text-sm leading-tight opacity-80 truncate">{location}</div>
         </div>
         <div className="shrink-0 text-[10px] sm:text-xs text-white/90">

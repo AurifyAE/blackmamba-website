@@ -33,7 +33,7 @@ export default function Rental() {
         </div>
         <div className="absolute inset-0 flex flex-col items-center justify-end text-center px-4 mb-30">
           
-          <h1 className="text-white text-4xl md:text-6xl max-w-xl font-semibold leading-16 mt-8">Where Happiness Finds a Home</h1>
+          <h1 className="text-white text-4xl md:text-6xl max-w-xs md:max-w-xl font-semibold leading-12 md:leading-16 mt-8">Where Happiness Finds a Home</h1>
           <p className="mt-4 text-white/90 text-base md:text-lg">READY TO MOVE RENTAL APARTMENTS</p>
         </div>
       </section>

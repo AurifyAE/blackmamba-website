@@ -96,9 +96,9 @@ export default function About() {
             </div>
           </div>
         </div>
-        <div className="absolute inset-0 flex items-center justify-end">
-          <div className="w-full max-w-lg text-white text-center mr-4 sm:mr-5 md:mr-[60px]">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold mb-6 leading-tight">
+        <div className="absolute inset-0 flex items-end md:items-center justify-center md:justify-end">
+          <div className="w-full max-w-xs md:max-w-xl text-white text-center mr-0 sm:mr-5 md:mr-[60px]">
+            <h1 className="text-4xl md:text-6xl font-semibold mb-20 md:mb-6 leading-tight">
               Where Happiness Finds a Home
             </h1>
           </div>
