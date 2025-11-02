@@ -112,7 +112,6 @@ export default function Home() {
                 imageAlt={property.imageAlt}
                 price={property.buyPrice || property.rentPrice || property.shortStayPrice || 'Price on request'}
                 cardTitle={property.cardTitle}
-                title={property.title}
                 location={property.location}
                 beds={property.beds}
                 baths={property.baths}
