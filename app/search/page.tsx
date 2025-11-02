@@ -84,8 +84,8 @@ function SearchContent() {
                   key={property.id}
                   imageSrc={property.imageSrc}
                   imageAlt={property.imageAlt}
+                  cardTitle={property.cardTitle}
                   price={getPriceForCategory(property, category)}
-                  title={property.title}
                   location={property.location}
                   beds={property.beds}
                   baths={property.baths}
