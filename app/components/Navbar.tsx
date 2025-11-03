@@ -206,15 +206,15 @@ export default function Navbar() {
             </button>
           )}
           <Link 
-            href="/login"
+            href="/register"
             className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
-              isActive('/login') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
+              isActive('/register') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
             }`}
           >
-            Sign in
+            Sign Up
             <span
               className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
-                isActive('/login') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
+                isActive('/register') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
               }`}
             ></span>
           </Link>
@@ -332,6 +332,17 @@ export default function Navbar() {
               Search
             </button>
           )}
+          <Link 
+            href="/register" 
+            onClick={closeMenu}
+            className={`cursor-pointer text-lg font-medium transition-colors ${
+              pathname === '/register'
+                ? 'text-[#A97C50]'
+                : 'hover:text-gray-600'
+            }`}
+          >
+            Sign Up
+          </Link>
         </div>
       </div>
     </>

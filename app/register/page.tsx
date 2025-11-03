@@ -10,15 +10,15 @@ export default function RegisterPage() {
     firstName: '',
     lastName: '',
     email: '',
-    password: '',
-    confirmPassword: '',
+    // password: '',
+    // confirmPassword: '',
     phone: '',
     preferredContact: 'email',
     newsletter: false,
     privacyPolicy: false
   })
-  const [showPassword, setShowPassword] = useState(false)
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  // const [showPassword, setShowPassword] = useState(false)
+  // const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value, type, checked } = e.target as HTMLInputElement
@@ -28,22 +28,52 @@ export default function RegisterPage() {
     }))
   }
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     // Basic validation
-    if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!')
-      return
-    }
+    // if (formData.password !== formData.confirmPassword) {
+    //   alert('Passwords do not match!')
+    //   return
+    // }
     
     if (!formData.privacyPolicy) {
       alert('Please accept the privacy policy to continue.')
       return
     }
     
-    console.log('Registration attempt:', formData)
-    // Handle registration logic here
+    try {
+      const res = await fetch('/api/newsletter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'registration',
+          ...formData
+        }),
+      })
+
+      const data = await res.json()
+
+      if (data.result === 'success') {
+        alert('Registration submitted successfully!')
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          // password: '',
+          // confirmPassword: '',
+          phone: '',
+          preferredContact: 'email',
+          newsletter: false,
+          privacyPolicy: false
+        })
+      } else {
+        alert('Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      console.error('Error:', error)
+      alert('Something went wrong. Please try again later.')
+    }
   }
 
   return (
@@ -133,8 +163,8 @@ export default function RegisterPage() {
                 />
               </div>
 
-              {/* Password Fields */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Password Fields - Commented out for now */}
+              {/* <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
                     Password *
@@ -201,7 +231,7 @@ export default function RegisterPage() {
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               {/* Preferred Contact */}
               <div>
@@ -293,7 +323,7 @@ export default function RegisterPage() {
             </form>
 
             {/* Login Link */}
-            <div className="mt-6 text-center">
+            {/* <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
                 Already have an account?{' '}
                 <Link
@@ -303,7 +333,7 @@ export default function RegisterPage() {
                   Sign in here
                 </Link>
               </p>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

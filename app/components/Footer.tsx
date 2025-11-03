@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Footer() {
   const [email, setEmail] = useState<string>('')
@@ -20,15 +20,15 @@ export default function Footer() {
     setStatus('')
 
     try {
-      const res = await fetch('https://script.google.com/macros/s/AKfycbwtKM5ae-SuT8BMsiRu6cAo6MTOIa15-hM71bcPwqeA4ih9x9plVv75JpR7edsuNi_z/exec', {
+      const res = await fetch('/api/newsletter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({ type: 'newsletter', email }),
       })
 
-      const data: { status?: string } = await res.json()
+      const data = await res.json()
 
-      if (data.status === 'success') {
+      if (data.result === 'success') {
         setStatus('Thank you for joining our community!')
         setEmail('')
       } else {
@@ -41,6 +41,16 @@ export default function Footer() {
       setLoading(false)
     }
   }
+
+  // Auto-hide status after 10 seconds
+  useEffect(() => {
+    if (status) {
+      const timer = setTimeout(() => {
+        setStatus('')
+      }, 5000)
+      return () => clearTimeout(timer)
+    }
+  }, [status])
 
   return (
     <footer className="w-full">
