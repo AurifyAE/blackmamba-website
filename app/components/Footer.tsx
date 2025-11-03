@@ -1,7 +1,47 @@
+"use client"
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Footer() {
+  const [email, setEmail] = useState<string>('')
+  const [status, setStatus] = useState<string>('')
+  const [loading, setLoading] = useState<boolean>(false)
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+
+    if (!email) {
+      setStatus('Please enter your email')
+      return
+    }
+
+    setLoading(true)
+    setStatus('')
+
+    try {
+      const res = await fetch('https://script.google.com/macros/s/AKfycbwtKM5ae-SuT8BMsiRu6cAo6MTOIa15-hM71bcPwqeA4ih9x9plVv75JpR7edsuNi_z/exec', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      })
+
+      const data: { status?: string } = await res.json()
+
+      if (data.status === 'success') {
+        setStatus('Thank you for joining our community!')
+        setEmail('')
+      } else {
+        setStatus('Something went wrong. Please try again.')
+      }
+    } catch (error) {
+      console.error(error)
+      setStatus('Network error. Try again later.')
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <footer className="w-full">
       {/* Newsletter Section */}
@@ -11,16 +51,30 @@ export default function Footer() {
             <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">
               Join Our Community
             </h2>
-            <div className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+            <form 
+            onSubmit={handleSubmit}
+            className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 placeholder="Enter your email to receive updates"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 rounded-4xl border border-white focus:outline-none focus:ring-2 focus:ring-white/50 text-gray-300 text-sm sm:text-base"
               />
-              <button className="bg-white text-[#A97C50] px-6 py-3 rounded-4xl font-medium hover:bg-gray-100 transition-colors text-sm sm:text-base">
-                Learn More
+              <button 
+              disabled={loading}
+              className={`bg-white text-[#A97C50] px-6 py-3 rounded-4xl font-medium transition-colors text-sm sm:text-base ${
+              loading
+                  ? 'opacity-70 cursor-not-allowed'
+                  : 'hover:bg-gray-100'
+              }`}
+              >
+                {loading ? 'Submitting...' : 'Learn More'}
               </button>
-            </div>
+            </form>
+            {status && (
+              <p className="text-white mt-3 text-sm">{status}</p>
+            )}
           </div>
         </div>
       </section>
