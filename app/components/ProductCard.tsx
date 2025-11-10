@@ -65,7 +65,7 @@ export default function ProductCard({
         )}
         {property.availableFor.includes('shortstay') && property.shortStayPrice && (
           <button 
-            onClick={(e) => handleActionClick('short-stay', e)}
+            onClick={(e) => handleActionClick('shortstays', e)}
             className="bg-green-600 text-white px-2 py-1 text-xs rounded hover:bg-green-700 transition-colors"
           >
             Short Stay
