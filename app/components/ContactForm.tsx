@@ -1,12 +1,13 @@
 "use client"
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 export default function ContactForm() {
   const [phone, setPhone] = useState("");
+  const [showThankYou, setShowThankYou] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -55,6 +56,9 @@ export default function ContactForm() {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    
+    // Show thank you message immediately
+    setShowThankYou(true);
     
     // Prepare the email content
     const emailSubject = encodeURIComponent("Property Inquiry - Black Mamba");
@@ -107,6 +111,24 @@ ${formData.firstName} ${formData.lastName}
 
   };
 
+  // Auto-hide thank you message after 5 seconds and scroll to it
+  useEffect(() => {
+    if (showThankYou) {
+      // Scroll to the thank you message
+      setTimeout(() => {
+        const messageElement = document.querySelector('[data-thank-you-message]');
+        if (messageElement) {
+          messageElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      }, 100);
+      
+      const timer = setTimeout(() => {
+        setShowThankYou(false);
+      }, 20000);
+      return () => clearTimeout(timer);
+    }
+  }, [showThankYou]);
+
   return (
     <section className="px-4 sm:px-5 md:px-15 py-8 sm:py-12">
       <div className="max-w-7xl mx-auto">
@@ -122,6 +144,21 @@ ${formData.firstName} ${formData.lastName}
 
           {/* Right Side - Form */}
           <div className="flex-1 bg-white p-6 sm:p-8 lg:p-12">
+            {/* Thank You Message - Outside form so it persists */}
+            {showThankYou && (
+              <div data-thank-you-message className="max-w-lg mx-auto mb-6 bg-green-50 border-2 border-green-500 rounded-lg p-4 transition-all duration-300 ease-in-out shadow-lg">
+                <div className="flex items-start gap-3">
+                  <svg className="w-6 h-6 text-green-600 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <div className="flex-1">
+                    <p className="text-green-800 font-bold text-base">Thank you for your inquiry!</p>
+                    <p className="text-green-700 text-sm mt-1">We've opened your email client. Our team will contact you shortly.</p>
+                  </div>
+                </div>
+              </div>
+            )}
+            
             <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4 sm:space-y-6">
               {/* Interested In */}
               <div>

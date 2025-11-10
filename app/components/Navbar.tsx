@@ -145,25 +145,19 @@ export default function Navbar() {
               }`}
             ></span>
           </Link>
-          <span 
+          <Link 
+            href="/shortstays"
             className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
-              isActive('/short-stay') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
+              isActive('/shortstays') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
             }`}
-            onMouseEnter={() => setHoveredButton('short-stays')}
-            onMouseLeave={() => setHoveredButton(null)}
           >
             Short Stays
             <span
               className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
-                isActive('/short-stay') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
+                isActive('/shortstays') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
               }`}
             ></span>
-            {hoveredButton === 'short-stays' && (
-              <span className="absolute top-full left-1/2 -translate-x-1/2 mt-2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
-                Coming Soon
-              </span>
-            )}
-          </span>
+          </Link>
           <Link 
             href="/about"
             className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${

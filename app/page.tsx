@@ -41,13 +41,17 @@ export default function Home() {
     <main>
       <Navbar />
       <section id="hero" className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
-        <Image
-          src="/images/heroImage.jpg"
-          alt="Hero"
-          fill
-          priority
-          className="object-cover"
-        />
+        <video 
+          autoPlay 
+          loop 
+          muted 
+          playsInline 
+          className="object-cover w-full h-full absolute inset-0"
+          poster="/images/hero-video.mp4"
+        >
+          <source src="/images/hero-video.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
           <h1 className="text-white text-5xl md:text-7xl font-semibold tracking-tight">Elevate Your Lifestyle</h1>

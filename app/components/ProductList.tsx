@@ -1,8 +1,9 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 import { properties, Property } from '../../data/properties'
 
 interface Product {
@@ -26,56 +27,77 @@ interface ProductListProps {
   products?: Product[]
 }
 
-// Transform properties data to match Product interface
-const propertyProducts: Product[] = properties.map((property: Property) => {
-  
-  const beds = property.beds
-  const baths = property.baths
-  const balconyQty = property.balconyQty || 0
-  
-  // Use area from property or extract from suite if available
-  let area = property.area
-  if (property.suite) {
-    const areaMatch = property.suite.match(/(\d+(?:\.\d+)?)/)
-    area = areaMatch ? areaMatch[1] : property.area
-  }
-  
-  // Determine property type based on available options
-  let propertyType = 'Apartment'
-  if (property.availableFor.includes('buy')) {
-    propertyType = 'Villa'
-  }
-  
-  // Determine city from location
-  let city = 'Dubai'
-  if (property.location.includes('Abu Dhabi')) {
-    city = 'Abu Dhabi'
-  } else if (property.location.includes('Sharjah')) {
-    city = 'Sharjah'
-  }
-  
-  // Use appropriate price based on availability
-  let price = property.rentPrice || property.buyPrice || property.shortStayPrice || 'Price on Request'
-  
-  return {
-    id: property.id,
-    imageSrc: property.imageSrc,
-    imageAlt: property.imageAlt,
-    price: price,
-    cardTitle: property.cardTitle,
-    title: property.title,
-    location: property.location,
-    beds: beds,
-    baths: baths,
-    balconyQty: balconyQty,
-    area: area,
-    propertyType: propertyType,
-    city: city,
-    href: `/rental/${property.id}`
-  }
-})
+export default function ProductList({ products }: ProductListProps) {
+  const pathname = usePathname()
+  const isShortStaysPage = pathname === '/shortstays'
 
-export default function ProductList({ products = propertyProducts }: ProductListProps) {
+  // Transform properties data to match Product interface
+  const propertyProducts: Product[] = useMemo(() => {
+    return properties
+      .filter((property: Property) => {
+        // On shortstays page, only show properties that have shortStayPrice
+        if (isShortStaysPage) {
+          return property.shortStayPrice && property.availableFor.includes('shortstay')
+        }
+        // On other pages, show all properties
+        return true
+      })
+      .map((property: Property) => {
+        const beds = property.beds
+        const baths = property.baths
+        const balconyQty = property.balconyQty || 0
+        
+        // Use area from property or extract from suite if available
+        let area = property.area
+        if (property.suite) {
+          const areaMatch = property.suite.match(/(\d+(?:\.\d+)?)/)
+          area = areaMatch ? areaMatch[1] : property.area
+        }
+        
+        // Determine property type based on available options
+        let propertyType = 'Apartment'
+        if (property.availableFor.includes('buy')) {
+          propertyType = 'Villa'
+        }
+        
+        // Determine city from location
+        let city = 'Dubai'
+        if (property.location.includes('Abu Dhabi')) {
+          city = 'Abu Dhabi'
+        } else if (property.location.includes('Sharjah')) {
+          city = 'Sharjah'
+        }
+        
+        // Use appropriate price based on page
+        let price = 'Price on Request'
+        if (isShortStaysPage) {
+          // On shortstays page, prioritize shortStayPrice
+          price = property.shortStayPrice || property.rentPrice || property.buyPrice || 'Price on Request'
+        } else {
+          // On other pages, use rentPrice or buyPrice
+          price = property.rentPrice || property.buyPrice || property.shortStayPrice || 'Price on Request'
+        }
+        
+        return {
+          id: property.id,
+          imageSrc: property.imageSrc,
+          imageAlt: property.imageAlt,
+          price: price,
+          cardTitle: property.cardTitle,
+          title: property.title,
+          location: property.location,
+          beds: beds,
+          baths: baths,
+          balconyQty: balconyQty,
+          area: area,
+          propertyType: propertyType,
+          city: city,
+          href: isShortStaysPage ? `/shortstays/${property.id}` : `/rental/${property.id}`
+        }
+      })
+  }, [isShortStaysPage])
+
+  const displayProducts = products || propertyProducts
   const [filters, setFilters] = useState({
     propertyType: '',
     bedrooms: '',
@@ -117,7 +139,7 @@ export default function ProductList({ products = propertyProducts }: ProductList
     }))
   }
 
-  const filteredAndSortedProducts = products
+  const filteredAndSortedProducts = displayProducts
     .filter(product => {
       if (filters.propertyType && product.propertyType !== filters.propertyType) return false
       if (filters.bedrooms && product.beds.toString() !== filters.bedrooms) return false
@@ -335,7 +357,7 @@ export default function ProductList({ products = propertyProducts }: ProductList
                
                {/* Results Count */}
                <p className="text-sm text-gray-600">
-                 {filteredAndSortedProducts.length} of {products.length}
+                 {filteredAndSortedProducts.length} of {displayProducts.length}
                </p>
              </div>
 
@@ -486,14 +508,14 @@ export default function ProductList({ products = propertyProducts }: ProductList
          {/* Results Count - Desktop Only */}
          <div className="mb-6 hidden md:block">
            <p className="text-sm text-gray-600">
-             Showing {filteredAndSortedProducts.length} of {products.length} properties
+             Showing {filteredAndSortedProducts.length} of {displayProducts.length} properties
            </p>
          </div>
 
         {/* Product Grid - 2 cards per row on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {filteredAndSortedProducts.map((product) => (
-            <Link key={product.id} href={`/rental/${product.id}`} className="block">
+            <Link key={product.id} href={product.href} className="block">
               <div className="relative aspect-square overflow-hidden group cursor-pointer">
                 <Image 
                   src={product.imageSrc} 

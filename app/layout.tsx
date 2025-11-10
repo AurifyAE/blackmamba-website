@@ -31,8 +31,13 @@ const avenirLocal = localFont({
 export const metadata: Metadata = {
   title: "BlackMamba Real Estate - Luxury Properties in Dubai",
   description: "Discover exclusive homes, flexible rentals, and luxury stays in Dubai. Premium real estate properties for buy, rent, or short stay.",
-  viewport: "width=device-width, initial-scale=1, maximum-scale=5",
 };
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+}
 
 export default function RootLayout({
   children,
