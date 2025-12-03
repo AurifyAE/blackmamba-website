@@ -174,7 +174,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/rental/shobha-waves" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/rental/sobha-waves" className="text-gray-300 hover:text-white transition-colors">
                     Sobha Hartland - Waves
                   </Link>
                 </li>
@@ -206,7 +206,7 @@ export default function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <Link href="/terms-conditions" className="text-gray-300 hover:text-white transition-colors">
+                  <Link href="/terms-and-conditions" className="text-gray-300 hover:text-white transition-colors">
                     Terms & Conditions
                   </Link>
                 </li>
