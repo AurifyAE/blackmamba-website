@@ -73,19 +73,19 @@ export default function Home() {
           <div className="bg-black p-4 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02]">
             <div className="flex flex-col gap-2">
               <h3 className="text-lg sm:text-xl font-medium text-white">To Buy</h3>
-              <p className="text-white/70 text-sm sm:text-base">Starting From AED 810,000</p>
+              <p className="text-white/70 text-sm sm:text-base">Starting From AED 500,000</p>
             </div>
           </div>
           <div className="bg-black p-4 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02]">
             <div className="flex flex-col gap-2">
               <h3 className="text-lg sm:text-xl font-medium text-white">To Rent</h3>
-              <p className="text-white/70 text-sm sm:text-base">Starting From AED 4,000</p>
+              <p className="text-white/70 text-sm sm:text-base">Starting From AED 5,000</p>
             </div>
           </div>
           <div className="bg-black p-4 sm:p-6 shadow-sm hover:shadow-md transition-all duration-200 hover:scale-[1.02] sm:col-span-2 lg:col-span-1">
             <div className="flex flex-col gap-2">
               <h3 className="text-lg sm:text-xl font-medium text-white">To Short Stay</h3>
-              <p className="text-white/70 text-sm sm:text-base">Starting From AED 1,000/night</p>
+              <p className="text-white/70 text-sm sm:text-base">Starting From AED 700/night</p>
             </div>
           </div>
         </div>

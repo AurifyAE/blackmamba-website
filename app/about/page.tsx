@@ -112,17 +112,20 @@ export default function About() {
           About Us
           </h2>
           <div className="max-w-5xl mx-auto">
+            <h3 className="text-lg sm:text-xl text-black/70 leading-relaxed mb-6">
+              BlackMamba Real Estate - Luxury Furnished Residences & Premium Short-Stay Properties in the UAE
+            </h3>
             <p className="text-base sm:text-base text-black/70 leading-relaxed mb-6">
-                At Black Mamba Real Estate, we believe a home is more than bricks and walls — it is the foundation of dreams, success, and lasting memories. With an unwavering commitment to excellence, we specialize in connecting our clients to properties that embody luxury, comfort, and prestige.
+              At BlackMamba Real Estate, we believe a home is more than bricks and walls - it is the foundation of dreams, success, and lasting memories. With an unwavering commitment to excellence, we specialize in connecting our clients to fully-furnished, ready-to-move-in luxury residences and short-stay properties across Dubai and the UAE.
             </p>
             <p className="text-base sm:text-base text-black/70 leading-relaxed mb-6">
-                Our philosophy is simple: every client deserves a lifestyle that reflects their aspirations. Whether it's a family seeking the perfect sanctuary, a couple envisioning their dream home, or investors pursuing high-value opportunities, we provide tailored solutions that go beyond expectations.
+              Our philosophy is simple: every client deserves a lifestyle that reflects their aspirations. Whether it’s a family seeking the perfect sanctuary, a couple envisioning their dream home, or investors pursuing premium real estate opportunities, we provide tailored property solutions that go beyond expectations.
             </p>
             <p className="text-base sm:text-base text-black/70 leading-relaxed mb-6">
-                Inspired by the strength, precision, and elegance of the Black Mamba, our brand represents power, exclusivity, and agility in the real estate market. We navigate with expertise, ensuring every transaction is seamless, transparent, and rewarding.
+              Inspired by the strength, precision, and elegance of the Black Mamba, our brand represents power, exclusivity, and agility in the real estate market. We navigate with expertise, ensuring every transaction is seamless, transparent, and rewarding.
             </p>
             <p className="text-base sm:text-base text-black/70 leading-relaxed">
-                With a portfolio of premium residences, luxury rentals, and investment properties, Black Mamba Real Estate stands as a trusted partner for those who seek not just a property, but a statement of success.
+              With a portfolio of luxury furnished apartments, villas, and fully-managed short-stay residences, BlackMamba Real Estate is a trusted partner for those seeking ready-to-move-in premium properties, high-value investments, and exclusive lifestyle experiences in Dubai and across the UAE.
             </p>
           </div>
         </div>
