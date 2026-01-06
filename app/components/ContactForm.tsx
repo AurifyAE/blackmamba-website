@@ -143,7 +143,7 @@ ${formData.firstName} ${formData.lastName}
           </div>
 
           {/* Right Side - Form */}
-          <div className="flex-1 bg-white p-6 sm:p-8 lg:p-12">
+          <div className="flex-1 bg-white p-4 sm:p-6 lg:p-8">
             {/* Thank You Message - Outside form so it persists */}
             {showThankYou && (
               <div data-thank-you-message className="max-w-lg mx-auto mb-6 bg-green-50 border-2 border-green-500 rounded-lg p-4 transition-all duration-300 ease-in-out shadow-lg">
@@ -159,7 +159,7 @@ ${formData.firstName} ${formData.lastName}
               </div>
             )}
             
-            <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-4 sm:space-y-6">
+            <form onSubmit={handleSubmit} className="max-w-lg mx-auto space-y-2 sm:space-y-4">
               {/* Interested In */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-3">
@@ -211,7 +211,7 @@ ${formData.firstName} ${formData.lastName}
                     value={formData.firstName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                    className="w-full h-10 px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                   />
                 </div>
                 <div>
@@ -225,7 +225,7 @@ ${formData.firstName} ${formData.lastName}
                     value={formData.lastName}
                     onChange={handleInputChange}
                     required
-                    className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                    className="w-full h-10 px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                   />
                 </div>
               </div>
@@ -249,18 +249,18 @@ ${formData.firstName} ${formData.lastName}
                   }}
                   inputStyle={{
                     width: '100%',
-                    height: '44px',
+                    height: '40px',
                     paddingLeft: '48px',
                     border: '1px solid #d1d5db',
                     borderRadius: '6px',
-                    fontSize: '16px'
+                    fontSize: '14px'
                   }}
                   buttonStyle={{
                     border: '1px solid #d1d5db',
                     borderRight: 'none',
                     borderRadius: '6px 0 0 6px',
                     backgroundColor: '#f9fafb',
-                    height: '44px'
+                    height: '40px'
                   }}
                   dropdownStyle={{
                     border: '1px solid #d1d5db',
@@ -288,7 +288,7 @@ ${formData.firstName} ${formData.lastName}
                   value={formData.email}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                  className="w-full h-10 px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 />
               </div>
 
@@ -303,7 +303,7 @@ ${formData.firstName} ${formData.lastName}
                   value={formData.unitType}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                  className="w-full h-10 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 >
                   <option value="">Select Unit Type</option>
                   <option value="1-bedroom">1 Bedroom</option>
@@ -323,7 +323,7 @@ ${formData.firstName} ${formData.lastName}
                   name="location"
                   value={formData.location}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 sm:py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm sm:text-base"
+                  className="w-full h-10 px-3 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#A97C50] focus:border-transparent text-sm"
                 >
                   <option value="">Select Location</option>
                   <option value="Downtown">Downtown</option>
