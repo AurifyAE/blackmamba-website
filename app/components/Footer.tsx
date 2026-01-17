@@ -228,7 +228,7 @@ export default function Footer() {
               </p>
             </div>
             <div className="text-center">
-              <p className="text-gray-500 text-[11px] sm:text-xs">
+              <p className="text-gray-500 text-[11px] pb-20 sm:pb-0 sm:text-xs">
                 Made by{" "}
                 <a
                   href="https://creative3r.com/"

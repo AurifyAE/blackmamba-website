@@ -29,9 +29,36 @@ const avenirLocal = localFont({
 
 
 export const metadata: Metadata = {
-  title: "BlackMamba Real Estate - Luxury Properties in Dubai",
-  description: "Discover exclusive homes, flexible rentals, and luxury stays in Dubai. Premium real estate properties for buy, rent, or short stay.",
-};
+    title: {
+      default: 'BlackMamba Real Estate - Luxury Properties in Dubai',
+      template: '%s | BlackMamba Real Estate'
+    },
+    description: 'Discover exclusive homes, flexible rentals, and luxury stays in Dubai. Premium real estate properties for buy, rent, or short stay.',
+    keywords: 'buy properties in Dubai, Properties in Dubai luxury flat in dubai, flexible rentals stays in Dubai, full furnished stays flat in Dubai, full facility rental in dubai, stay in dubai, premium stay in dubai',
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      type: 'website',
+      locale: 'en_AE',
+      url: 'https://www.blackmamba.realestate/',
+      siteName: 'BlackMamba Real Estate',
+      title: 'BlackMamba Real Estate - Luxury Properties in Dubai',
+      description: 'Discover exclusive homes, flexible rentals, and luxury stays in Dubai.',
+      images: [
+        {
+          url: '/og-image.jpg',
+          width: 1200,
+          height: 630,
+          alt: 'BlackMamba Real Estate',
+        },
+      ],
+    },
+    alternates: {
+      canonical: 'https://www.blackmamba.realestate/',
+    },
+  };
 
 export const viewport = {
   width: 'device-width',

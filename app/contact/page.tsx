@@ -5,6 +5,20 @@ import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from '../components/Footer'
 import Image from 'next/image'
 
+export const metadata = {
+  title: 'Luxury Residential Apartments and Properties for Rent in Dubai',
+  description: 'We are the perfect option for flat rental in your trip to Dubai. Weekly apartment rentals, private apartment rentals, apartment rentals with family-friendly apartment',
+  keywords: 'rental properties in Dubai, Properties in Dubai luxury flat in dubai, flexible rentals stays in Dubai, full furnished rental flat in Dubai, full facility rental in dubai, rental stay in dubai, premium rental stay in dubai',
+  openGraph: {
+    title: 'Luxury Residential Apartments and Properties for Rent in Dubai',
+    description: 'Perfect option for flat rental in Dubai. Weekly and private apartment rentals.',
+    url: 'https://www.blackmamba.realestate/contact',
+  },
+  alternates: {
+    canonical: 'https://www.blackmamba.realestate/contact',
+  },
+};
+
 const page = () => {
   return (
     <main>

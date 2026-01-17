@@ -3,6 +3,20 @@ import Navbar from "../components/Navbar";
 import Breadcrumbs from "../components/Breadcrumbs";
 import Footer from "../components/Footer";
 
+export const metadata = {
+  title: 'Buy, Rent, Short Stay Luxury Premium Apartment in Dubai',
+  description: 'BlackMamba Real Estate presents a range of apartments home, flexible rentals, short stay and luxury stays in Dubai at key locations such as Business Bay, Marina, Downtown etc',
+  keywords: 'buy properties in Dubai, single bedroom apartment, Dual Balcony Apartment in dubai, Properties in Dubai luxury flat in dubai, flexible rentals stays in Dubai, full furnished stays flat in Dubai, full facility rental in dubai, stay in dubai, premium stay in dubai',
+  openGraph: {
+    title: 'Buy, Rent, Short Stay Luxury Premium Apartment in Dubai',
+    description: 'BlackMamba Real Estate presents a range of apartments in prime Dubai locations.',
+    url: 'https://www.blackmamba.realestate/about',
+  },
+  alternates: {
+    canonical: 'https://www.blackmamba.realestate/about',
+  },
+};
+
 export default function About() {
   const bentoImages = [
     {

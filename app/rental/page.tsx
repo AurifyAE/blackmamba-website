@@ -7,11 +7,24 @@ import FeaturedProperties from "../components/FeaturedProperties";
 import SearchBar from "../components/SearchBar";
 import Breadcrumbs from "../components/Breadcrumbs";
 
+export const metadata = {
+  title: 'Luxury and Premium Class Rental Stay in Dubai With Best Price',
+  description: 'All rental enquiry BlackMamba Real Estate is the best option for your homes Rentals, flexible rentals, and luxury rental stays in Dubai with affordable price.',
+  keywords: 'rental properties in Dubai, Properties in Dubai luxury flat in dubai, flexible rentals stays in Dubai, full furnished rental flat in Dubai, full facility rental in dubai, rental stay in dubai, premium rental stay in dubai',
+  openGraph: {
+    title: 'Luxury and Premium Class Rental Stay in Dubai With Best Price',
+    description: 'Best option for homes rentals, flexible rentals, and luxury rental stays in Dubai.',
+    url: 'https://www.blackmamba.realestate/rental',
+  },
+  alternates: {
+    canonical: 'https://www.blackmamba.realestate/rental',
+  },
+};
+
 export default function Rental() {
   return (
     <main>
       <Navbar />
-     
       
       {/* Hero Section - Same as Homepage */}
       <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
