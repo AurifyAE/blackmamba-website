@@ -29,7 +29,7 @@ export default function Rental() {
       {/* Hero Section - Same as Homepage */}
       <section className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
         <Image
-          src="/images/rental/rental-banner.jpg"
+          src="/images/rental/rental-cover.jpg"
           alt="Hero"
           fill
           priority

@@ -35,7 +35,7 @@ export default function About() {
       title: ""
     },
     {
-      src: "/images/about/bento4.jpg",
+      src: "/images/about/bento9.jpeg",
       alt: "Palm Jumeirah",
       title: ""
     },
@@ -95,7 +95,7 @@ export default function About() {
       {/* Hero Section with Background Image and Right Aligned Text */}
       <section id="hero" className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
         <Image
-          src="/images/about/abouthero.jpg"
+          src="/images/about/about-cover.jpeg"
           alt="About BlackMamba Real Estate"
           fill
           priority
