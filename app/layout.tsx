@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Script from "next/script";
 
 
 const canelaDeck = localFont({
@@ -77,6 +78,20 @@ export default function RootLayout({
         className={`${canelaDeck.variable} ${avenirLocal.variable} antialiased`}
       >
         {children}
+
+        {/* Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-DB1E3JXJBM"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-DB1E3JXJBM');
+          `}
+        </Script>
       </body>
     </html>
   );
