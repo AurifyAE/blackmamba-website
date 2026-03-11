@@ -14,7 +14,7 @@ export interface Property {
   shortStayPrice?: string
   descriptionTitle: string
   description: string
-  description2?: string 
+  description2?: string
   description3?: string | string[]
   galleryImages: string[]
   floorPlan?: string
@@ -34,6 +34,101 @@ export interface Property {
 }
 
 export const properties: Property[] = [
+  {
+    id: "canal-bay-1802",
+    cardTitle: "Canal Bay",
+    title: "Burj Khalifa and Canal views | 3 Bedroom premium Apartment | Fully Furnished",
+    location: "Business Bay, Dubai",
+    imageSrc: "/images/rental/canal-bay-1802/REP04528.jpg",
+    imageAlt: "Canal Bay by Ned",
+    beds: 3,
+    baths: 2.5,
+    area: "1,265.9",
+    availableFor: ['rent', 'shortstay'],
+    rentPrice: "AED 180,000",
+    shortStayPrice: "AED 1,000/night",
+    descriptionTitle: "Burj Khalifa and Canal views | 3 Bedroom premium Apartment | Fully Furnished",
+    description: "Experience the perfect blend of luxury, convenience, and urban serenity. Nestled in the heart of Business Bay, Canal Bay by NED redefines contemporary waterfront living. Enjoy panoramic views of the Dubai Canal and the iconic Burj Khalifa, all from the comfort of your elegantly designed home.",
+    description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges—luxury, location, and lifestyle.",
+    description3: `Be at the center of everything—where work, leisure, and relaxation coexist in perfect balance. Canal Bay offers residents a tranquil escape within one of Dubai's most vibrant neighborhoods. Designed for discerning homeowners and savvy investors alike, this property promises a lifestyle of comfort, connectivity, and class.
+
+For more information or to schedule a private viewing, contact:
+Blackmamba Real Estate L.L.C.`,
+    features: [
+      "Prime waterfront location in Business Bay",
+      "Breathtaking Burj Khalifa and Canal views",
+      "Ready for immediate occupancy",
+      "Spacious, modern apartments with elegant interiors",
+      "State-of-the-art amenities including gym, swimming pool, and relaxation areas",
+      "High-quality finishes and thoughtfully designed layouts",
+      "Dedicated parking and 24/7 security services"
+    ],
+    galleryImages: [
+      "/images/rental/canal-bay-1802/REP04510.jpg",
+      "/images/rental/canal-bay-1802/REP04513.jpg",
+      "/images/rental/canal-bay-1802/REP04522.jpg",
+      "/images/rental/canal-bay-1802/REP04528.jpg",
+      "/images/rental/canal-bay-1802/REP04546.jpg",
+      "/images/rental/canal-bay-1802/REP04555.jpg",
+      "/images/rental/canal-bay-1802/REP04565.jpg",
+      "/images/rental/canal-bay-1802/REP04582.jpg",
+      "/images/rental/canal-bay-1802/REP04588.jpg",
+      "/images/rental/canal-bay-1802/REP04618.jpg",
+      "/images/rental/canal-bay-1802/REP04624.jpg",
+      "/images/rental/canal-bay-1802/REP04634.jpg",
+      "/images/rental/canal-bay-1802/REP04637.jpg",
+      "/images/rental/canal-bay-1802/REP04652.jpg",
+      "/images/rental/canal-bay-1802/REP04658.jpg",
+      "/images/rental/canal-bay-1802/REP04670.jpg",
+      "/images/rental/canal-bay-1802/REP04676.jpg",
+      "/images/rental/canal-bay-1802/REP04681.jpg",
+      "/images/rental/canal-bay-1802/REP04684.jpg",
+      "/images/rental/canal-bay-1802/REP04687.jpg",
+      "/images/rental/canal-bay-1802/REP04696.jpg",
+      "/images/rental/canal-bay-1802/REP04708.jpg",
+      "/images/rental/canal-bay-1802/REP04711.jpg",
+      "/images/rental/canal-bay-1802/REP04728.jpg",
+      "/images/rental/canal-bay-1802/REP04729.jpg",
+      "/images/rental/canal-bay-1802/REP04731.jpg",
+      "/images/rental/canal-bay-1802/REP04733.jpg",
+      "/images/rental/canal-bay-1802/REP04734.jpg",
+      "/images/rental/canal-bay-1802/REP04735.jpg",
+      "/images/rental/canal-bay-1802/REP04736.jpg",
+      "/images/rental/canal-bay-1802/REP04738.jpg",
+      "/images/rental/canal-bay-1802/REP04740.jpg",
+      "/images/rental/canal-bay-1802/REP04744.jpg",
+      "/images/rental/canal-bay-1802/REP04987.jpg",
+      "/images/rental/canal-bay-1802/REP04988.jpg",
+      "/images/rental/canal-bay-1802/REP04991.jpg",
+      "/images/rental/canal-bay-1802/REP04993.jpg",
+      "/images/rental/canal-bay-1802/REP04995.jpg",
+      "/images/rental/canal-bay-1802/REP04998.jpg",
+      "/images/rental/canal-bay-1802/REP05010.jpg",
+      "/images/rental/canal-bay-1802/REP05012.jpg",
+      "/images/rental/canal-bay-1802/REP05014.jpg",
+      "/images/rental/canal-bay-1802/REP05019.jpg",
+      "/images/rental/canal-bay-1802/REP05020.jpg"
+    ],
+    floorPlan: "/images/rental/canalbay/canal-bay-floor-plan.jpg",
+    companyName: "Ned by Al Ghurair",
+    companyLogo: "/images/rental/canalbay/ned-by-al-ghurair.png",
+    unit: "3 BEDROOM + 2.5 BATHS + 1 BALCONY",
+    balconyQty: 1,
+    suite: "117.61 SQ.FT",
+    balcony: "17.01 SQ.FT.",
+    total: "1449.0 SQ.FT",
+    fullWidthImage: "/images/rental/building-exterior.jpg",
+    embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.637277352512!2d55.27215097433425!3d25.181722683108518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6984f23c0735%3A0x8093941d20babfbc!2sCanal%20Bay%20by%20NED!5e0!3m2!1sen!2sin!4v1762144811688!5m2!1sen!2sin",
+    nearbyLocations: [
+      { location: "Scenic Canal Water Views and Walking & Jogging Tracks", time: "" },
+      { location: "Close to Burj Khalifa and Downtown Dubai", time: "" },
+      { location: "Wide range of Bars, Cafés & Fine Dining Restaurants", time: "" },
+      { location: "Excellent Bus & Metro Connectivity", time: "" },
+      { location: "Nearby Supermarkets, Pharmacies, and Retail Stores", time: "" },
+      { location: "Access to premium Hotels & Spas", time: "" },
+      { location: "Nursery and Early Childcare Facilities within proximity", time: "" }
+    ]
+  },
   {
     id: "canal-bay",
     cardTitle: "Canal Bay",
@@ -120,7 +215,7 @@ Blackmamba Real Estate L.L.C.`,
       { location: "Excellent Bus & Metro Connectivity", time: "" },
       { location: "Nearby Supermarkets, Pharmacies, and Retail Stores", time: "" },
       { location: "Access to premium Hotels & Spas", time: "" },
-      { location: "Nursery and Early Childcare Facilities within proximity", time: ""}
+      { location: "Nursery and Early Childcare Facilities within proximity", time: "" }
     ]
   },
   {
@@ -234,7 +329,7 @@ Blackmamba Real Estate L.L.C.`,
       "/images/rental/sobha-wave/sobha-wave-20.jpeg",
       "/images/rental/sobha-wave/sobha-wave-21.jpeg",
       "/images/rental/sobha-wave/sobha-wave-23.jpeg",
-      
+
     ],
     floorPlan: "/images/rental/sobha-wave/sobha-hartland-waves.jpg",
     companyName: "Sobha Hartland - Waves",
@@ -253,34 +348,34 @@ Blackmamba Real Estate L.L.C.`,
       { location: "Community Feel: Waterfront living with premium Sobha quality, combining tranquility, prestige, and a refined residential experience.", time: "" },
     ]
   },
-  {
-    id: "azizi-developments",
-    cardTitle: "Azizi Developments",
-    title: "Azizi Developments",
-    location: "Dubai Marina",
-    imageSrc: "/images/product-azizi-developments-dubai.png",
-    imageAlt: "Azizi Developments",
-    beds: 1,
-    baths: 1,
-    area: "2,800",
-    availableFor: [ 'rent' ],
-    rentPrice: "AED 65,000",
-    shortStayPrice: "AED 1,200/night",
-    descriptionTitle: "",
-    description: "Luxury villa in Dubai Marina with private beach access and marina views.",
-    features: [
-      "Dubai Marina location",
-      "Private beach access",
-      "Marina views",
-      "Spacious layout",
-      "Premium amenities"
-    ],
-    galleryImages: [
-      "/images/product-azizi-developments-dubai.png",
-      "/images/dubai-marina.png"
-    ],
-    companyName: "Azizi Developments",
-    companyLogo: "/images/rental/sobhaone-logo.png",
-    comingSoon: true
-  },
+  // {
+  //   id: "azizi-developments",
+  //   cardTitle: "Azizi Developments",
+  //   title: "Azizi Developments",
+  //   location: "Dubai Marina",
+  //   imageSrc: "/images/product-azizi-developments-dubai.png",
+  //   imageAlt: "Azizi Developments",
+  //   beds: 1,
+  //   baths: 1,
+  //   area: "2,800",
+  //   availableFor: ['rent'],
+  //   rentPrice: "AED 65,000",
+  //   shortStayPrice: "AED 1,200/night",
+  //   descriptionTitle: "",
+  //   description: "Luxury villa in Dubai Marina with private beach access and marina views.",
+  //   features: [
+  //     "Dubai Marina location",
+  //     "Private beach access",
+  //     "Marina views",
+  //     "Spacious layout",
+  //     "Premium amenities"
+  //   ],
+  //   galleryImages: [
+  //     "/images/product-azizi-developments-dubai.png",
+  //     "/images/dubai-marina.png"
+  //   ],
+  //   companyName: "Azizi Developments",
+  //   companyLogo: "/images/rental/sobhaone-logo.png",
+  //   comingSoon: true
+  // },
 ]
