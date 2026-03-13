@@ -45,12 +45,12 @@ export const properties: Property[] = [
     baths: 2.5,
     area: "1,265.9",
     availableFor: ['rent', 'shortstay'],
-    rentPrice: "AED 180,000",
-    shortStayPrice: "AED 1,000/night",
+    rentPrice: "AED 220,000",
+    shortStayPrice: "AED 1,500/night",
     descriptionTitle: "Burj Khalifa and Canal views | 3 Bedroom premium Apartment | Fully Furnished",
     description: "Experience the perfect blend of luxury, convenience, and urban serenity. Nestled in the heart of Business Bay, Canal Bay by NED redefines contemporary waterfront living. Enjoy panoramic views of the Dubai Canal and the iconic Burj Khalifa, all from the comfort of your elegantly designed home.",
-    description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges—luxury, location, and lifestyle.",
-    description3: `Be at the center of everything—where work, leisure, and relaxation coexist in perfect balance. Canal Bay offers residents a tranquil escape within one of Dubai's most vibrant neighborhoods. Designed for discerning homeowners and savvy investors alike, this property promises a lifestyle of comfort, connectivity, and class.
+    description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges-luxury, location, and lifestyle.",
+    description3: `Be at the center of everything - where work, leisure, and relaxation coexist in perfect balance. Canal Bay offers residents a tranquil escape within one of Dubai's most vibrant neighborhoods. Designed for discerning homeowners and savvy investors alike, this property promises a lifestyle of comfort, connectivity, and class.
 
 For more information or to schedule a private viewing, contact:
 Blackmamba Real Estate L.L.C.`,
@@ -114,8 +114,8 @@ Blackmamba Real Estate L.L.C.`,
     companyLogo: "/images/rental/canalbay/ned-by-al-ghurair.png",
     unit: "3 BEDROOM + 2.5 BATHS + 1 BALCONY",
     balconyQty: 1,
-    suite: "117.61 SQ.FT",
-    balcony: "17.01 SQ.FT.",
+    suite: "1265.94 SQ.FT",
+    balcony: "183.1 SQ.FT.",
     total: "1449.0 SQ.FT",
     fullWidthImage: "/images/rental/building-exterior.jpg",
     embedUrl: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3610.637277352512!2d55.27215097433425!3d25.181722683108518!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e5f6984f23c0735%3A0x8093941d20babfbc!2sCanal%20Bay%20by%20NED!5e0!3m2!1sen!2sin!4v1762144811688!5m2!1sen!2sin",
@@ -144,8 +144,8 @@ Blackmamba Real Estate L.L.C.`,
     shortStayPrice: "AED 1,000/night",
     descriptionTitle: "Waterfront Sophistication 3 Bedroom premium Apartment | Fully Furnished",
     description: "Experience the perfect blend of luxury, convenience, and urban serenity. Nestled in the heart of Business Bay, Canal Bay by NED redefines contemporary waterfront living. Enjoy panoramic views of the Dubai Canal and the iconic Burj Khalifa, all from the comfort of your elegantly designed home.",
-    description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges—luxury, location, and lifestyle.",
-    description3: `Be at the center of everything—where work, leisure, and relaxation coexist in perfect balance. Canal Bay offers residents a tranquil escape within one of Dubai's most vibrant neighborhoods. Designed for discerning homeowners and savvy investors alike, this property promises a lifestyle of comfort, connectivity, and class.
+    description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges-luxury, location, and lifestyle.",
+    description3: `Be at the center of everything where work, leisure, and relaxation coexist in perfect balance. Canal Bay offers residents a tranquil escape within one of Dubai's most vibrant neighborhoods. Designed for discerning homeowners and savvy investors alike, this property promises a lifestyle of comfort, connectivity, and class.
 
 For more information or to schedule a private viewing, contact:
 Blackmamba Real Estate L.L.C.`,
@@ -232,11 +232,11 @@ Blackmamba Real Estate L.L.C.`,
     rentPrice: "AED 240,000",
     shortStayPrice: "AED 1,200/night",
     descriptionTitle: "Live where the city's heartbeat is strongest.",
-    description: "Discover a refined rental opportunity in Dunya Tower by Emirates Properties — located in the very heart of Downtown Dubai, steps from the Dubai Mall, the Burj Khalifa, and the city’s most iconic attractions.",
+    description: "Discover a refined rental opportunity in Dunya Tower by Emirates Properties - located in the very heart of Downtown Dubai, steps from the Dubai Mall, the Burj Khalifa, and the city’s most iconic attractions.",
     description3: [
       "Luxurious Interior Design: Fully upgraded with premium materials and high-end finishes, creating a refined and contemporary living environment throughout.",
-      "Dual Balconies: Enjoy seamless indoor-outdoor living with two private balconies — one extending from the kitchen and another from the bedroom — each offering partial views of the iconic Burj Khalifa and the vibrant Downtown skyline.",
-      "Closed Kitchen with Balcony Access: A spacious, well-appointed closed kitchen featuring modern fittings and direct access to the balcony — ideal for those who enjoy both cooking and entertaining.",
+      "Dual Balconies: Enjoy seamless indoor-outdoor living with two private balconies - one extending from the kitchen and another from the bedroom - each offering partial views of the iconic Burj Khalifa and the vibrant Downtown skyline.",
+      "Closed Kitchen with Balcony Access: A spacious, well-appointed closed kitchen featuring modern fittings and direct access to the balcony - ideal for those who enjoy both cooking and entertaining.",
       "Dedicated Study Room: A versatile space that can be perfectly utilized as a home office, creative corner, or an expansive storage room, depending on your lifestyle needs.",
       "Laundry & Storage Room: A separate laundry area with integrated storage, providing both practicality and organization for everyday living.",
       "Guest Powder Room: Elegant and convenient, designed to enhance comfort when hosting family or visitors."
