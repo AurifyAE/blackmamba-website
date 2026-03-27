@@ -41,10 +41,10 @@ const homeStructuredData = {
 };
 
 export default function Home() {
-  
+
   const carouselImages = [
     {
-      src: "/images/rental/canalbay/canalbay-7.jpeg",
+      src: "/images/rental/canal-bay-1802/REP04528.jpg",
       alt: 'Beautiful landscape',
     },
     {
@@ -63,7 +63,7 @@ export default function Home() {
       src: "/images/rental/downtown-img/downtown-5.jpeg",
       alt: 'Ocean waves',
     },
-    
+
   ]
 
   return (
@@ -72,11 +72,11 @@ export default function Home() {
       <main>
         <Navbar />
         <section id="hero" className="relative w-full h-[500px] sm:h-[600px] md:h-[700px]">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="object-cover w-full h-full absolute inset-0"
             poster="/images/hero-video.mp4"
           >
@@ -87,7 +87,7 @@ export default function Home() {
           <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
             <h1 className="text-white text-5xl md:text-7xl font-semibold tracking-tight">Elevate Your Lifestyle</h1>
             <p className="mt-4 text-white/90 text-base">Discover exclusive homes, flexible rentals, and luxury stays all under one iconic brand</p>
-            
+
             {/* Search Bar Component */}
             <div className="mt-6">
               <SearchBar />
@@ -123,7 +123,7 @@ export default function Home() {
         </section>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-10 md:px-15 py-8 sm:py-12 overflow-hidden">
-          <HomeCarousel 
+          <HomeCarousel
             images={carouselImages}
             peekAmount={35}
             centerScale={1.15}
@@ -138,7 +138,7 @@ export default function Home() {
               <h2 className="text-xl sm:text-2xl md:text-4xl font-semibold text-black">Black Mamba Exclusives</h2>
               <p className="mt-3 text-black/70 text-sm sm:text-base md:text-lg max-w-3xl mx-auto">Dubai's most exclusive properties — available to buy, rent, or enjoy on a short stay.</p>
             </div>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 mb-6">
               {properties.slice(0, 4).map((property) => (
                 <ProductCard
@@ -177,13 +177,13 @@ export default function Home() {
             <FeaturedProperties />
           </div>
         </section>
-          
+
 
         <ContactForm />
         <Footer />
         <ContactNavbar />
       </main>
     </>
-    
+
   );
 }
