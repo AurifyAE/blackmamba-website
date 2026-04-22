@@ -61,9 +61,9 @@ export default function Footer() {
             <h2 className="text-white text-xl sm:text-2xl md:text-3xl font-semibold mb-4 sm:mb-6">
               Join Our Community
             </h2>
-            <form 
-            onSubmit={handleSubmit}
-            className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
+            <form
+              onSubmit={handleSubmit}
+              className="max-w-md mx-auto flex flex-col sm:flex-row gap-3">
               <input
                 type="email"
                 placeholder="Enter your email to receive updates"
@@ -71,13 +71,12 @@ export default function Footer() {
                 onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 rounded-4xl border border-white focus:outline-none focus:ring-2 focus:ring-white/50 text-gray-300 text-sm sm:text-base"
               />
-              <button 
-              disabled={loading}
-              className={`bg-white text-[#A97C50] px-6 py-3 rounded-4xl font-medium transition-colors text-sm sm:text-base ${
-              loading
+              <button
+                disabled={loading}
+                className={`bg-white text-[#A97C50] px-6 py-3 rounded-4xl font-medium transition-colors text-sm sm:text-base ${loading
                   ? 'opacity-70 cursor-not-allowed'
                   : 'hover:bg-gray-100'
-              }`}
+                  }`}
               >
                 {loading ? 'Submitting...' : 'Learn More'}
               </button>
@@ -106,10 +105,15 @@ export default function Footer() {
                 <div className="text-gray-300 text-sm sm:text-base leading-relaxed">
                   <p>805, Tamani Arts Tower,</p>
                   <p>Business Bay</p>
-                  <p className="mt-2">+971 50 110 0678</p>
+                  <Link href="tel:+971568297272" target="_blank">
+                    <p className="mt-2">+971 56 829 7272</p>
+                  </Link>
+                  <Link href="mailto:info@blackmamba.realestate" target="_blank">
+                    <p className="mt-2">info@blackmamba.realestate</p>
+                  </Link>
                 </div>
               </div>
-              
+
               {/* Social Links */}
               <div className="flex space-x-4 mb-8">
                 <a
@@ -168,7 +172,7 @@ export default function Footer() {
             <div className="order-3 lg:order-3">
               <h3 className="text-base md:text-lg font-semibold mb-4">Explore</h3>
               <ul className="space-y-3 text-sm md:text-base">
-              <li>
+                <li>
                   <Link href="/rental/canal-bay" className="text-gray-300 hover:text-white transition-colors">
                     Canal bay
                   </Link>

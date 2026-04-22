@@ -12,13 +12,13 @@ const ContactNavbar = () => {
             ENQUIRY
           </button>
         </Link>
-        <Link href="tel:+971501100678" target="_blank">
+        <Link href="tel:+971568297272" target="_blank">
           <button className="flex flex-col items-center gap-1 sm:gap-2 text-white px-3 rounded-md hover:bg-neutral-600 transition-colors text-[10px] tracking-wider">
             <Image src="/images/phone.svg" alt="" width={25} height={25} />
             CALL
           </button>
         </Link>
-        <Link href="https://wa.me/971501100678" target="_blank">
+        <Link href="https://wa.me/971568297272" target="_blank">
           <button className="flex flex-col items-center gap-1 sm:gap-2 text-white px-3 rounded-md hover:bg-neutral-600 transition-colors text-[10px] tracking-wider">
             <Image src="/images/whatsapp.svg" alt="" width={25} height={25} />
             WHATSAPP
