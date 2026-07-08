@@ -31,6 +31,7 @@ export interface Property {
   embedUrl?: string
   nearbyLocations?: Array<{ location: string; time: string }>
   comingSoon?: boolean
+  airbnbLink?: string
 }
 
 export const properties: Property[] = [
@@ -47,6 +48,7 @@ export const properties: Property[] = [
     availableFor: ['rent', 'shortstay'],
     rentPrice: "AED 220,000",
     shortStayPrice: "AED 1,600/night",
+    airbnbLink: "https://www.airbnb.co.uk/rooms/1645149066570787511?unique_share_id=c855e5a3-d391-4473-9ae0-4d3bb3353dcc&viralityEntryPoint=1&s=76",
     descriptionTitle: "Burj Khalifa and Canal views | 3 Bedroom premium Apartment | Fully Furnished",
     description: "Experience the perfect blend of luxury, convenience, and urban serenity. Nestled in the heart of Business Bay, Canal Bay by NED redefines contemporary waterfront living. Enjoy panoramic views of the Dubai Canal and the iconic Burj Khalifa, all from the comfort of your elegantly designed home.",
     description2: "Each residence at Canal Bay is meticulously crafted, featuring refined interiors, top-tier finishes, and modern amenities that create a seamless living experience. Whether you seek a peaceful retreat or a vibrant city lifestyle, this is where everything converges-luxury, location, and lifestyle.",
@@ -231,6 +233,7 @@ Blackmamba Real Estate L.L.C.`,
     availableFor: ['rent', 'shortstay'],
     rentPrice: "AED 240,000",
     shortStayPrice: "AED 1,800/night",
+    airbnbLink: "https://www.airbnb.co.uk/rooms/1700852017499926696?unique_share_id=8f7df5c6-da8b-4117-a8e7-fe07751b1355&viralityEntryPoint=1&s=76",
     descriptionTitle: "Live where the city's heartbeat is strongest.",
     description: "Discover a refined rental opportunity in Dunya Tower by Emirates Properties - located in the very heart of Downtown Dubai, steps from the Dubai Mall, the Burj Khalifa, and the city’s most iconic attractions.",
     description3: [
@@ -298,6 +301,7 @@ Blackmamba Real Estate L.L.C.`,
     availableFor: ['rent', 'shortstay'],
     rentPrice: "AED 110,000",
     shortStayPrice: "AED 800/night",
+    airbnbLink: "https://www.airbnb.co.uk/rooms/1699048191287962221?unique_share_id=9f94e906-47fa-4d41-a884-eb25638e53a2&viralityEntryPoint=1&s=76",
     descriptionTitle: "Waterfront Elegance | 1-Bedroom apartment | Fully Furnished",
     description: "Discover a refined waterfront residence where sophistication meets serenity. Positioned on the scenic 1.8 km boardwalk of Sobha Hartland's Waterfront District, Hartland Waves by Sobha Realty is a 35-storey architectural landmark, offering uninterrupted 360-degree views and a lifestyle of elevated calm.",
     features: [

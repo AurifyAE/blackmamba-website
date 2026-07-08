@@ -37,17 +37,6 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
       <div className="w-full max-w-4xl mx-auto flex justify-start px-2">
         <div className="flex rounded-t-xl bg-white/5 backdrop-blur-md border-t border-white/20 shadow-sm overflow-hidden">
           <button
-            onClick={() => setSelectedCategory('buy')}
-            className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
-              selectedCategory === 'buy'
-                ? 'bg-[#A97C50]/50 text-white shadow'
-                : 'bg-transparent text-white hover:bg-white/20'
-            }`}
-            style={{ borderRight: '1px solid rgba(255,255,255,0.11)' }}
-          >
-            Buy
-          </button>
-          <button
             onClick={() => setSelectedCategory('rent')}
             className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
               selectedCategory === 'rent'
@@ -65,8 +54,19 @@ export default function SearchBar({ className = '' }: SearchBarProps) {
                 ? 'bg-[#A97C50]/50 text-white shadow'
                 : 'bg-transparent text-white hover:bg-white/20'
             }`}
+            style={{ borderRight: '1px solid rgba(255,255,255,0.11)' }}
           >
             Short Stays
+          </button>
+          <button
+            onClick={() => setSelectedCategory('buy')}
+            className={`px-4 py-2 text-sm md:text-base font-semibold backdrop-blur-sm transition-all duration-200 ${
+              selectedCategory === 'buy'
+                ? 'bg-[#A97C50]/50 text-white shadow'
+                : 'bg-transparent text-white hover:bg-white/20'
+            }`}
+          >
+            Buy
           </button>
         </div>
       </div>

@@ -116,7 +116,30 @@ export default function Navbar() {
         </Link>
 
         <div className='lg:flex justify-between items-center gap-2 hidden relative'>
-          <span 
+          <Link href="/rental"  className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
+              isActive('/rental') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
+            }`}>
+            Rent
+            <span
+              className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
+                isActive('/rental') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
+              }`}
+            ></span>
+          </Link>
+          <Link
+            href="/shortstays"
+            className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
+              isActive('/shortstays') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
+            }`}
+          >
+            Short Stays
+            <span
+              className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
+                isActive('/shortstays') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
+              }`}
+            ></span>
+          </Link>
+          <span
             className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
               isActive('/buy') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
             }`}
@@ -135,30 +158,7 @@ export default function Navbar() {
               </span>
             )}
           </span>
-          <Link href="/rental"  className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
-              isActive('/rental') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
-            }`}>
-            Rent
-            <span
-              className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
-                isActive('/rental') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
-              }`}
-            ></span>
-          </Link>
-          <Link 
-            href="/shortstays"
-            className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
-              isActive('/shortstays') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
-            }`}
-          >
-            Short Stays
-            <span
-              className={`absolute left-1/2 bottom-0 h-[2px] bg-[#A97C50] transition-all duration-500 ease-out ${
-                isActive('/shortstays') ? 'w-full -translate-x-1/2' : 'w-0 -translate-x-1/2 group-hover:w-full'
-              }`}
-            ></span>
-          </Link>
-          <Link 
+          <Link
             href="/about"
             className={`relative px-1 mx-3 py-1 transition-all duration-300 group ${
               isActive('/about') ? 'text-[#A97C50]' : 'hover:text-[#A97C50]'
@@ -253,20 +253,8 @@ export default function Navbar() {
           </button>
         </div>
         <div className='flex flex-col items-start px-6 py-6 gap-6'>
-          <span 
-            className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors relative'
-            onMouseEnter={() => setHoveredButton('buy-mobile')}
-            onMouseLeave={() => setHoveredButton(null)}
-          >
-            Buy
-            {hoveredButton === 'buy-mobile' && (
-              <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
-                Coming Soon
-              </span>
-            )}
-          </span>
-          <Link 
-            href="/rental" 
+          <Link
+            href="/rental"
             onClick={closeMenu}
             className={`cursor-pointer text-lg font-medium transition-colors ${
               pathname.startsWith('/rental')
@@ -276,7 +264,7 @@ export default function Navbar() {
           >
             Rent
           </Link>
-          <span 
+          <span
             className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors relative'
             onMouseEnter={() => setHoveredButton('short-stays-mobile')}
             onMouseLeave={() => setHoveredButton(null)}
@@ -288,7 +276,19 @@ export default function Navbar() {
               </span>
             )}
           </span>
-          <Link 
+          <span
+            className='cursor-pointer text-lg font-medium hover:text-gray-600 transition-colors relative'
+            onMouseEnter={() => setHoveredButton('buy-mobile')}
+            onMouseLeave={() => setHoveredButton(null)}
+          >
+            Buy
+            {hoveredButton === 'buy-mobile' && (
+              <span className="absolute left-full ml-3 top-1/2 -translate-y-1/2 bg-black text-white text-xs px-3 py-1 rounded whitespace-nowrap pointer-events-none z-10">
+                Coming Soon
+              </span>
+            )}
+          </span>
+          <Link
             href="/about" 
             onClick={closeMenu}
             className={`cursor-pointer text-lg font-medium transition-colors ${
